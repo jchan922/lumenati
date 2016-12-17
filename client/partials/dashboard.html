@@ -1,0 +1,119 @@
+<div ng-controller="dashboardController">
+
+    <nav class="navbar navbar-default">
+        <div id="navbar" class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul id="nav_ul">
+                        <li><h4><span class="glyphicon glyphicon-eye-open"></span> Welcome, {{session_user.first_name}}!</h4></li>
+                        <li><a href="#" ng-click="logout()">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <h3>Markers</h3>
+                <form ng-submit="addMarker(newMarker)">
+                    <div class="form-group">
+                        <p>Add a new marker: </p>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="title" placeholder="Title" ng-model="newMarker.title" value="">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="address" placeholder="Address" ng-model="newMarker.address" value="">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="category" placeholder="Category" ng-model="newMarker.category" value="">
+                                <option value="" disabled selected>Select A Category...</option>
+                                <option value="Food">Food</option>
+                                <option value="Coffee">Coffee</option>
+                                <option value="Bar/Nightlife">Bar/Nightlife</option>
+                                <option value="Point of Interest">Point of Interest</option>
+                                <option value="Venue">Venue</option>
+                                <option value="Shopping">Shopping</option>
+                                <option value="Airport">Airport</option>
+                                <option value="Hotel">Hotel</option>
+                            </select>
+                        </div>
+                        <!-- <div class="form-group">
+                            <input type="text" class="form-control" id="category" placeholder="Category" ng-model="newMarker.category">
+                        </div> -->
+                        <div class="form-group">
+                            <textarea type="textarea" class="form-control" id="description" placeholder="Description" ng-model="newMarker.description" value=""></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="url" placeholder="URL (optional)" ng-model="newMarker.url" value="">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="list" placeholder="Add to a list (optional)" ng-model="newMarker.list" value="">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="latitude" placeholder="Latitude" disabled="true" ng-model="newMarker.latitude" value="">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="longitude" placeholder="Longitude" disabled="true" ng-model="newMarker.longitude" value="">
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Add Marker">
+                    </div>
+                </form>
+
+
+
+                <!-- Sorting
+                1) List all categories user has created. Populate with checkbox.
+                2) Checkbox runs function that runs a sort of only that specfic category
+                3) Uncheck restores show all -->
+
+                <h3>Filter</h3>
+                <ul id="sort_category">
+                    <li ng-repeat="category in category_array"><input type="checkbox"><h4> {{category}} </h4></li>
+                    <div class="checkbox">
+                        <label><input type="checkbox" ng-click="showAllMarkers()"><b>Show All Markers<b></label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" ng-click="filterFood()">Food</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="">Coffee</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="">Bar/Nightlife</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="">Point of Interest</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="">Venue</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="">Shopping</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="">Airport</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="">Hotel</label>
+                    </div>
+                </ul>
+
+                <!-- <ul id="ul_bookmark">
+                    <li ng-repeat="bookmark in allUserBookmarks"><input type="checkbox" ng-checked="bookmark.done == true" ng-model="form.done" ng-click="checkbox(bookmark._id)"><b>{{bookmark._creator.name}}</b> | {{bookmark.title}} - {{bookmark.description}} -- {{bookmark.createdAt | date: "MMM dd, yyyy"}}</li>
+                </ul> -->
+
+
+
+
+            </div>
+            <div class="col-md-10">
+                <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

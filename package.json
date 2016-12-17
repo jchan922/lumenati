@@ -1,0 +1,23 @@
+{
+  "name": "mean_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "angular-ui-bootstrap": "^2.2.0",
+    "body-parser": "latest",
+    "colors": "latest",
+    "ejs": "latest",
+    "express": "^4.14.0",
+    "express-session": "latest",
+    "mongoose": "latest",
+    "path": "latest",
+    "socket.io": "latest"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

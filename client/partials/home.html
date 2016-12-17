@@ -1,0 +1,80 @@
+<div ng-controller="loginController">
+    <div class="container-fluid">
+        <div class="row" id="main_img">
+            <div id="logo_font" class="col-md-8">
+                <h1>Lumenati.</h1>
+                <p id="eye_open"><span class="glyphicon glyphicon-eye-open"></span> Shed some light.</p>
+            </div>
+            <div class="col-md-4" id="modal_buttons" >
+                <div class="card card-block" id="card">
+                    <h2 class="card-title">Welcome!</h2>
+                    <!-- Button trigger modal -->
+                    <p ng-repeat="error in loginErrors">{{error.message}}</p>
+                    <form  ng-submit="loginUser(loginUserAttempt)">
+                        <label style="display:block;">Username: <input type="text" ng-model="loginUserAttempt.username"></label>
+                        <label style="display:block;">Password: <input type="password" ng-model="loginUserAttempt.password"></label>
+                        <button class="btn btn-primary btn-md" type="submit">Log-In</button>
+                        <button class="card-link btn btn-md" type="button" data-toggle="modal" data-target="#register"> Register </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-2"></div>
+            <div class="col-md-6"></div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <!-- <i class="medium material-icons">list</i> -->
+                <h3><span class="glyphicon glyphicon-list"></span> Add Bookmarks</h3>
+                <p>Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs. Some don't, become nothing. She starred in one of the ones that became nothing.</p>
+            </div>
+            <div class="col-md-4">
+                <!-- <i class="medium material-icons">supervisor_account</i> -->
+                <h3><span class="glyphicon glyphicon-user"></span> Create A Group</h3>
+                <p>Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs. Some don't, become nothing. She starred in one of the ones that became nothing.</p>
+            </div>
+            <div class="col-md-4">
+                <!-- <i class="medium material-icons">location_on</i> -->
+                <h3><span class="glyphicon glyphicon-map-marker"></span> Google Maps Integration</h3>
+                <p>Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs. Some don't, become nothing. She starred in one of the ones that became nothing.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Begin Register Modal -->
+    <div class="modal fade" id="register" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Log-In</h4>
+          </div>
+          <div class="modal-body">
+              <p ng-repeat="error in regErrors">{{error.message}}</p>
+              <form ng-submit="registerUser()">
+                  <label style="display:block;">First Name: <input type="text" ng-model="regUser.first_name"></label>
+                  <label style="display:block;">Last Name: <input type="text" ng-model="regUser.last_name"></label>
+                  <label style="display:block;">Username: <input type="text" ng-model="regUser.username"></label>
+                  <label style="display:block;">Email: <input type="email" ng-model="regUser.email"></label>
+                  <label style="display:block;">Password: <input type="password" ng-model="regUser.password"></label>
+                  <label style="display:block;">Password Confirmation: <input type="password" ng-model="regUser.passwordConf"></label>
+                  <button class="btn btn-success" type="submit">Register</button>
+              </form>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+</div>

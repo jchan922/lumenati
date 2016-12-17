@@ -1,0 +1,39 @@
+body {
+    color: #232C3B;
+}
+
+#logo_font{
+    color: #232C3B;
+}
+
+
+div {
+    /*border: 1px dotted red;*/
+}
+
+#main_img {
+    height: 850px;
+    background-position: 5% 20%;
+    background-image: url('http://www.tainoconsultinggroup.com/wp-content/uploads/2016/05/slider1.jpg');
+}
+
+h1 {
+    text-align: left;
+    font-size: 56px;
+}
+
+    #eye_open {
+        text-align: left;
+    }
+
+#card {
+    border: 5px solid black;
+    border-radius: 5px solid black;
+    background-color: white;
+    height: 200px;
+    text-align: center;
+    margin: 15px 15px 0px 0px;
+}
+    #card h1 {
+        padding-top: 10px;
+    }
