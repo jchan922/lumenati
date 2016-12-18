@@ -6,6 +6,12 @@
                 <div class="col-md-12">
                     <ul id="nav_ul">
                         <li><h4><span class="glyphicon glyphicon-eye-open"></span> Welcome, {{session_user.first_name}}!</h4></li>
+                        <li><a href="#" ng-click="">My Map</a></li>
+                        |
+                        <li><a href="" class="card-link" type="button" data-toggle="modal" data-target="#group">Groups</a></li>
+                        |
+                        <li><a href="#" ng-click="">Profile</a></li>
+                        |
                         <li><a href="#" ng-click="logout()">Logout</a></li>
                     </ul>
                 </div>
@@ -20,11 +26,14 @@
                 <form ng-submit="addMarker(newMarker)">
                     <div class="form-group">
                         <p>Add a new marker: </p>
+                        <p class="redText">{{newMarkerErrors.emptyForm}}</p>
                         <div class="form-group">
                             <input type="text" class="form-control" id="title" placeholder="Title" ng-model="newMarker.title" value="">
+                            <p class="redText">{{newMarkerErrors.title}}</p>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="address" placeholder="Address" ng-model="newMarker.address" value="">
+                            <p class="redText">{{newMarkerErrors.address}}</p>
                         </div>
                         <div class="form-group">
                             <select class="form-control" id="category" placeholder="Category" ng-model="newMarker.category" value="">
@@ -57,7 +66,9 @@
                         <div class="form-group">
                             <input type="text" class="form-control" id="longitude" placeholder="Longitude" disabled="true" ng-model="newMarker.longitude" value="">
                         </div>
+                        <p class="redText">{{newMarkerErrors.coordinates}}</p>
                         <input type="submit" class="btn btn-primary" value="Add Marker">
+
                     </div>
                 </form>
 
@@ -115,5 +126,47 @@
         </div>
     </div>
 
+    <!-- Begin Create Group Modal -->
+    <div class="modal fade" id="group" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title">Groups</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row" id="modal_row">
+                            <div class="col-md-4" id="current_groups">
+                                <h3>Recent Groups</h3>
+                                <ul>
+                                    <li>Tokyo</li>
+                                    <li>Bay Area</li>
+                                    <li>Spain</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4" id="select_group">
+                                <h3>Join Existing Group</h3>
+                                <form ng-submit="registerGroup()">
+                                    <label style="display:block;">Group Name: <input type="text" ng-model="regGroup.first_name"></label>
+                                    <label style="display:block;">Password: <input type="password" ng-model="regGroup.password"></label>
+                                    <button class="btn btn-success" type="submit">Join</button>
+                                </form>
+                            </div>
+                            <div class="col-md-4" id="new_group">
+                                <h3>Create A New Group</h3>
+                                <form ng-submit="registerGroup()">
+                                    <label style="display:block;">Group Name: <input type="text" ng-model="regGroup.first_name"></label>
+                                    <label style="display:block;">Password: <input type="password" ng-model="regGroup.password"></label>
+                                    <label style="display:block;">Password Confirmation: <input type="password" ng-model="regGroup.passwordConf"></label>
+                                    <button class="btn btn-success" type="submit">Create</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
 </div>

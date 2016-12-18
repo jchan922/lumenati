@@ -22,7 +22,7 @@ app.controller('dashboardController', ['$scope', '$location', 'usersFactory', 'm
         // console.log($scope.newMarker);
         markersFactory.addMarker($scope.newMarker, function(returnDataFromFactory){
             if(returnDataFromFactory.hasOwnProperty('errors')){
-                $scope.newMarkerErrors = returnDataFromFactory.errors;
+                $scope.newMarkerErrors = returnDataFromFactory.errors.general;
             } else {
                 // console.log(returnDataFromFactory.data);
                 showAllMarkers();
@@ -171,8 +171,7 @@ app.controller('dashboardController', ['$scope', '$location', 'usersFactory', 'm
             element.setAttribute("value", val)
         }
         $scope.markerForm = markerForm;
-    }
-
+    };
 
 
     var toggleBounce = function() {
@@ -181,14 +180,14 @@ app.controller('dashboardController', ['$scope', '$location', 'usersFactory', 'm
         } else {
             marker.setAnimation(google.maps.Animation.BOUNCE);
         }
-    }
+    };
 
     var handleLocationError = function(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(browserHasGeolocation ?
                                 'Error: Could not find current location.' :
                                 'Error: Your browser doesn\'t support geolocation.');
-    }
+    };
 
 
 // GET CURRENT USER =============================================================================

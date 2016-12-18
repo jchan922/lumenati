@@ -15,7 +15,7 @@ app.factory('markersFactory', ['$http', '$routeParams', function($http, $routePa
         $http.post('/marker/new', newMarkerObjectFromForm).then(function(returnedDataFromServer){
             // console.log("**** Response from server is: ", returnedDataFromServer.data);
             if(typeof(callback) == 'function'){
-                callback(returnedDataFromServer.data );
+                callback(returnedDataFromServer.data);
             }
         });
     };

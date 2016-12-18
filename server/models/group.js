@@ -1,7 +1,7 @@
 
 //  *************************************   //
 //  *                                   *   //
-//  *          MARKER MODELS            *   //
+//  *          GROUP MODELS             *   //
 //  *                                   *   //
 //  *************************************   //
 
@@ -10,17 +10,14 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 // BUILD USER SCHEMA ====================================================================
-var MarkerSchema = new mongoose.Schema({
-    title: {type:String, required:true},
-    address: {type:String, required:true},
-    category: {type:String},
-    description: {type:String},
-    url: {type:String},
-    list: {type: String},
-    latitude: {type: Number},
-    longitude: {type: Number},
+var GroupSchema = new mongoose.Schema({
+    name: {type:String, required:true},
+    password: {type:String, minlength:8},
+    public: {type:Boolean, default: false},
+    members: [{type:Schema.Types.ObjectId, ref:'Member'}],
+    markers: [{type:Schema.Types.ObjectId, ref:'Marker'}],
     _creator: {type:Schema.Types.ObjectId, ref:'Creator'},
 }, {timestamps:true});
 
 // register the schema as a model
-var marker = mongoose.model('Marker', MarkerSchema);
+var group = mongoose.model('Group', GroupSchema);

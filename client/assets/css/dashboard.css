@@ -1,3 +1,7 @@
+.redText {
+    color: red;
+}
+
 .navbar {
     padding: 10px 0px;
     margin: 0px;
@@ -79,6 +83,20 @@ h1 {
 
     #sort_category li h4{
         display: inline;
+    }
+
+
+#modal_row input {
+    display: block;
+}
+
+    #current_groups {
+        display: inline-block;
+    }
+
+    #new_group {
+        display: inline-block;
+        vertical-align: top;
     }
 
 /*#pac-input:focus {

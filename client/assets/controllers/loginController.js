@@ -21,7 +21,8 @@ app.controller('loginController', ['$scope', '$location', 'usersFactory', functi
                 var reg = document.getElementsByClassName("modal-backdrop fade in");
                 console.log(reg);
                 reg[0].parentNode.removeChild(reg[0]);
-                $location.url('/dashboard');
+                var username = $scope.regUser.username;
+                $location.url('/dashboard/'+username);
             }
         });
     };
@@ -36,7 +37,8 @@ app.controller('loginController', ['$scope', '$location', 'usersFactory', functi
                 $scope.loginErrors = returnDataFromFactory.errors;
                 $scope.loginUserAttempt = {};
             } else {
-                $location.url('/dashboard');
+                var username = $scope.loginUserAttempt.username;
+                $location.url('/dashboard/'+username);
             }
         });
     };

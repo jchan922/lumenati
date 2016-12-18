@@ -23,7 +23,7 @@ app.config(function ($routeProvider, $httpProvider) {
         .when('/home',{
             templateUrl: 'partials/home.html'
         })
-        .when('/dashboard',{
+        .when('/dashboard/:username',{
             templateUrl: 'partials/dashboard.html'
         })
         .when('/profile/:_id',{

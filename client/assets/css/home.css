@@ -1,6 +1,10 @@
+
 body {
     color: #232C3B;
 }
+    .redText {
+    color: red;
+    }
 
 #logo_font{
     color: #232C3B;
