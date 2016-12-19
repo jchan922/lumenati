@@ -20,6 +20,7 @@ module.exports = function(app) {
     app.get('/marker/show/all', markers.show_all);
     app.get('/marker/show/filter/food', markers.filter_food);
     app.post('/group/new', groups.create);
+    app.post('/group/join', groups.join);    
 };
 
 

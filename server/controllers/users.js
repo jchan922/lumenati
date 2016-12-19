@@ -16,14 +16,12 @@ module.exports = {
                 }
             }
             res.json(errors);
-        }
-        else if(req.body.password != req.body.passwordConf){
+        } else if(req.body.password != req.body.passwordConf){
             var errors = {errors:{
                 general:{message:"Passwords must match."}
-                }
-            }
+                }}
             res.json(errors);
-            }else{
+            } else {
                 var registerUser = new User(req.body);
                 registerUser.save(function(err, user){
                     if (err) {
@@ -109,7 +107,7 @@ module.exports = {
                 // console.log("***************** Found a match. Gathering user info. Going back to the front-end.".yellow);
                 // console.log("Session user:".green,session_user);
                 // console.log("Going back to the front-end. *****************".yellow);
-                console.log(session_user);
+                // console.log(session_user);
                 res.json(session_user);
             }
         })

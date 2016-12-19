@@ -22,7 +22,7 @@ module.exports = {
                     if(err){
                         res.json(err)
                     } else {
-                        user.groups.push(newGroup)
+                        user.groups.push(newGroup._id)
                         user.save(function(err){
                             if(err){
                                 res.json(err);
@@ -39,6 +39,44 @@ module.exports = {
         })
     },
 
+// JOIN EXISTING GROUP INTO BATABASE ===============================================================================
+    join: function(req,res){
+        console.log("***************** Got to SERVER users.js CREATE ".green);
+        console.log("***************** DATA TO CREATE".green, req.body);
+        Group.findOne({name: req.body.name}).exec(function(err,foundGroup){
+            if(!foundGroup || req.body.password != foundGroup.password){
+                var errors = {errors:{
+                    general:{message:"Invalid group information."}
+                    }
+                }
+                res.json(errors);
+            } else {
+                foundGroup.members.push(req.session.user._id)
+                foundGroup.save(function(err, foundGroup){
+                    if (err) {
+                        console.log("There were validation errors:", err);
+                        res.json(err);
+                    } else {
+                        User.findOne({_id:req.session.user._id}).exec(function(err,user){
+                            if(err){
+                                res.json(err)
+                            } else {
+                                user.groups.push(foundGroup._id)
+                                user.save(function(err){
+                                    if(err){
+                                        res.json(err);
+                                    } else {
+                                        res.sendStatus(200)
+                                        console.log("***************** Group joined and added to User".green);
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    },
 
 
 

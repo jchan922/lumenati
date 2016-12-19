@@ -116,10 +116,6 @@
                     <li ng-repeat="bookmark in allUserBookmarks"><input type="checkbox" ng-checked="bookmark.done == true" ng-model="form.done" ng-click="checkbox(bookmark._id)"><b>{{bookmark._creator.name}}</b> | {{bookmark.title}} - {{bookmark.description}} -- {{bookmark.createdAt | date: "MMM dd, yyyy"}}</li>
                 </ul> -->
 
-
-
-
-            </div>
             <div class="col-md-10">
                 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
                 <div id="map"></div>
@@ -140,10 +136,8 @@
                         <div class="row" id="modal_row">
                             <div class="col-md-4" id="current_groups">
                                 <h3>Recent Groups</h3>
-                                <ul>
-                                    <li>Tokyo</li>
-                                    <li>Bay Area</li>
-                                    <li>Spain</li>
+                                <ul ng-repeat="group in userGroups">
+                                    <li><a href="#/dashboard/group/{{group.name}}">{{group.name}}</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-4" id="select_group">

@@ -75,7 +75,7 @@ app.controller('groupController', ['$scope', '$location', 'usersFactory', 'marke
     }
     initMap();
 
-// SHOW ALL CURRENT USERS MARKERS ==================================================================
+// SHOW ALL GROUP MARKERS ==================================================================
     var showAllGroupMarkers = function() {
         // console.log("***************** Got to CLIENT dashboardController.js showAllMarkers");
         markersFactory.showAllMarkers(function(returnDataFromFactory){
@@ -175,6 +175,7 @@ app.controller('groupController', ['$scope', '$location', 'usersFactory', 'marke
         var getSessionUser = function(){
             usersFactory.getSessionUser(function(user){
                 $scope.session_user = user;
+                $scope.userGroups = user.groups
                 // console.log("**** Now useable as $scope variable", user);
             })
         };
