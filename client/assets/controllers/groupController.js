@@ -1,77 +1,18 @@
 //  *****************************************  //
 //  *                                       *  //
-//  *           DASHBOARD CONTROLLER        *  //
+//  *           GROUP CONTROLLER            *  //
 //  *                                       *  //
 //  *****************************************  //
 
-app.controller('dashboardController', ['$scope', '$location', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, usersFactory, markersFactory, groupsFactory) {
+app.controller('groupController', ['$scope', '$location', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, usersFactory, markersFactory, groupsFactory) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MARKER METHODS
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// CREATE NEW MARKER ============================================================================
-    $scope.addMarker = function() {
-        // console.log("***************** Got to CLIENT dashboardController.js addMarker");
-        $scope.newMarker = {
-            title: title.value,
-            address: address.value,
-            category: category.value,
-            description: description.value,
-            url: url.value,
-            list: list.value,
-            latitude: latitude.value,
-            longitude: longitude.value
-        }
-        // console.log($scope.newMarker);
-        markersFactory.addMarker($scope.newMarker, function(returnDataFromFactory){
-            if(returnDataFromFactory.hasOwnProperty('errors')){
-                $scope.newMarkerErrors = returnDataFromFactory.errors.general;
-            } else {
-                // console.log(returnDataFromFactory.data);
-                showAllMarkers();
-                $scope.newMarker = {};
-            }
-        })
-    }
-
-// FILTER CATEGORIES ============================================================================
-    $scope.filterFood = function() {
-        console.log("***************** Got to CLIENT dashboardController.js filterFood");
-        markersFactory.filterFood(function(returnDataFromFactory){
-            if(returnDataFromFactory.hasOwnProperty('errors')){
-                $scope.filterFoodErrors = returnDataFromFactory.errors;
-            } else {
-                console.log(returnDataFromFactory);
-            }
-        })
-    }
-
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GROUP METHODS
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// CREATE NEW GROUP ========================================================================
-    $scope.registerGroup = function() {
-        // console.log("***************** Got to CLIENT loginController.js registerUser".green);
-        groupsFactory.create($scope.regGroup, function(returnDataFromFactory){
-            // console.log(returnDataFromFactory);
-            if(returnDataFromFactory.hasOwnProperty('errors')){
-                $scope.regErrors = returnDataFromFactory.errors;
-            } else {
-                var reg = document.getElementsByClassName("modal-backdrop fade in");
-                console.log(reg);
-                reg[0].parentNode.removeChild(reg[0]);
-                var groupName = $scope.regGroup.name;
-                $location.url('/dashboard/group/'+groupName);
-            }
-        });
-    };
-
-
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GOOGLE MAPS API METHODS
@@ -107,7 +48,7 @@ app.controller('dashboardController', ['$scope', '$location', 'usersFactory', 'm
             marker.addListener('click', toggleBounce);
             marker.setPosition(pos);
             $scope.map = map;
-            showAllMarkers();
+            // showAllGroupMarkers();
 
             // GOOGLE PLACES API AUTOCOMPLETE
             // Get the HTML input element for search for the autocomplete search box
@@ -135,7 +76,7 @@ app.controller('dashboardController', ['$scope', '$location', 'usersFactory', 'm
     initMap();
 
 // SHOW ALL CURRENT USERS MARKERS ==================================================================
-    var showAllMarkers = function() {
+    var showAllGroupMarkers = function() {
         // console.log("***************** Got to CLIENT dashboardController.js showAllMarkers");
         markersFactory.showAllMarkers(function(returnDataFromFactory){
             if(returnDataFromFactory.hasOwnProperty('errors')){
@@ -234,7 +175,6 @@ app.controller('dashboardController', ['$scope', '$location', 'usersFactory', 'm
         var getSessionUser = function(){
             usersFactory.getSessionUser(function(user){
                 $scope.session_user = user;
-                $scope.userGroups = user.groups
                 // console.log("**** Now useable as $scope variable", user);
             })
         };

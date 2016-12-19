@@ -1,4 +1,4 @@
-<div ng-controller="dashboardController">
+<div ng-controller="groupController">
 
     <nav class="navbar navbar-default">
         <div id="navbar" class="container-fluid">
@@ -6,7 +6,7 @@
                 <div class="col-md-12">
                     <ul id="nav_ul">
                         <li><h4><span class="glyphicon glyphicon-eye-open"></span> Welcome, {{session_user.first_name}}!</h4></li>
-                        <li><a href="#" ng-click="">My Map</a></li>
+                        <li><a href="#/dashboard/{{session_user.username}}" ng-click="">My Map</a></li>
                         |
                         <li><a href="" class="card-link" type="button" data-toggle="modal" data-target="#group">Groups</a></li>
                         |
@@ -22,6 +22,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2">
+                <h2>GROUP NAME HERE</h2>
                 <h3>Markers</h3>
                 <form ng-submit="addMarker(newMarker)">
                     <div class="form-group">
@@ -147,16 +148,18 @@
                             </div>
                             <div class="col-md-4" id="select_group">
                                 <h3>Join Existing Group</h3>
-                                <form ng-submit="registerGroup()">
-                                    <label style="display:block;">Group Name: <input type="text" ng-model="regGroup.first_name"></label>
-                                    <label style="display:block;">Password: <input type="password" ng-model="regGroup.password"></label>
+                                <!-- <p ng-repeat="error in regErrors">{{error.message}}</p> -->
+                                <form ng-submit="joinGroup()">
+                                    <label style="display:block;">Group Name: <input type="text" ng-model="joinGroup.name"></label>
+                                    <label style="display:block;">Password: <input type="password" ng-model="joinGroup.password"></label>
                                     <button class="btn btn-success" type="submit">Join</button>
                                 </form>
                             </div>
                             <div class="col-md-4" id="new_group">
                                 <h3>Create A New Group</h3>
+                                <!-- <p ng-repeat="error in regErrors">{{error.message}}</p> -->
                                 <form ng-submit="registerGroup()">
-                                    <label style="display:block;">Group Name: <input type="text" ng-model="regGroup.first_name"></label>
+                                    <label style="display:block;">Group Name: <input type="text" ng-model="regGroup.name"></label>
                                     <label style="display:block;">Password: <input type="password" ng-model="regGroup.password"></label>
                                     <label style="display:block;">Password Confirmation: <input type="password" ng-model="regGroup.passwordConf"></label>
                                     <button class="btn btn-success" type="submit">Create</button>

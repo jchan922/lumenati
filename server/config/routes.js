@@ -7,6 +7,7 @@
 
 var users = require('../controllers/users.js');
 var markers = require('../controllers/markers.js');
+var groups = require('../controllers/groups.js');
 
 module.exports = function(app) {
 
@@ -18,6 +19,7 @@ module.exports = function(app) {
     app.post('/marker/new', markers.add);
     app.get('/marker/show/all', markers.show_all);
     app.get('/marker/show/filter/food', markers.filter_food);
+    app.post('/group/new', groups.create);
 };
 
 

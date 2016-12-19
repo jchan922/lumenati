@@ -9,7 +9,7 @@ module.exports = {
     register: function(req,res){
         // console.log("***************** Got to SERVER users.js CREATE ".green);
         // console.log("***************** DATA TO CREATE".green, req.body);
-        User.findOne({username:req.body.username}).exec(function(err, user){
+        User.findOne({username:req.body.username}).populate("groups").exec(function(err, user){
         if(user){
             var errors = {errors:{
                 general:{message:"Email already exists."}
@@ -36,6 +36,7 @@ module.exports = {
                             last_name: user.last_name,
                             username: user.username,
                             email: user.email,
+                            groups: user.groups
                         }
                         // console.log("***************** Creating a user session. Going back to the front-end".green);
                         res.sendStatus(200);
@@ -53,7 +54,7 @@ module.exports = {
             general:{message:"Invalid login information"}
             }
         }
-        User.findOne({username:req.body.username}).exec(function(err, user){
+        User.findOne({username:req.body.username}).populate("groups").exec(function(err, user){
             if(!req.body.username||!req.body.password||!user){
                 res.json(errors);
             }else{
@@ -66,6 +67,7 @@ module.exports = {
                         last_name: user.last_name,
                         username: user.username,
                         email: user.email,
+                        groups: user.groups
                     }
                     // console.log("***************** Found a match. Creating a user session. Going back to the front-end.".green);
                     // console.log(req.session.user);
@@ -92,7 +94,7 @@ module.exports = {
     sessionUser: function(req,res){
         // console.log("***************** Got to SERVER users.js DASHBOARD ".yellow);
         // console.log("***************** DATA TO FIND".yellow, req.session.user);
-        User.findOne({_id:req.session.user._id}).exec(function(err, user){
+        User.findOne({_id:req.session.user._id}).populate("groups").exec(function(err, user){
             if(err){
                 res.sendStatus(401);
             } else {
@@ -102,10 +104,12 @@ module.exports = {
                     last_name: user.last_name,
                     username: user.username,
                     email: user.email,
+                    groups: user.groups
                 }
                 // console.log("***************** Found a match. Gathering user info. Going back to the front-end.".yellow);
                 // console.log("Session user:".green,session_user);
                 // console.log("Going back to the front-end. *****************".yellow);
+                console.log(session_user);
                 res.json(session_user);
             }
         })
