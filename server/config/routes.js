@@ -26,9 +26,8 @@ module.exports = function(app) {
     app.post('/group/new', groups.create);
     app.post('/group/join', groups.join);
     app.post('/marker/group/new/:_id', markers.addGroupMarker);
-    app.get('/marker/group/show/all/:_id', markers.show_group_all);    
+    app.get('/marker/group/show/all/:_id', markers.show_group_all);
 };
-
 
 // ESTABLISHING MIDDLEWARE FUNCTION
 function userAuth(req,res,next){

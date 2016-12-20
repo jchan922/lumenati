@@ -151,7 +151,6 @@ module.exports = {
 
     // SHOW ALL MARKERS TO CURRENT GROUP ===========================================================================
     show_group_all: function(req,res){
-        console.log("show_group_all");
         Group.findOne({_id:req.params._id}).populate('markers').exec(function(err,markers){
             if(err){
                 console.log("Something went wrong in Group");

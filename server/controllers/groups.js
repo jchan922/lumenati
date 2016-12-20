@@ -27,7 +27,7 @@ module.exports = {
                             if(err){
                                 res.json(err);
                             } else {
-                                res.sendStatus(200)
+                                res.json(newGroup)
                                 console.log("***************** Group created and added to User".green);
                                 console.log("Group created:".green, newGroup);
                                 console.log("Going back to the front-end. *****************".green);

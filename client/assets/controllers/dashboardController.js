@@ -61,10 +61,11 @@ app.controller('dashboardController', ['$scope', '$location', 'usersFactory', 'm
             if(returnDataFromFactory.hasOwnProperty('errors')){
                 $scope.regErrors = returnDataFromFactory.errors;
             } else {
+                console.log(returnDataFromFactory._id);
                 var reg = document.getElementsByClassName("modal-backdrop fade in");
                 console.log(reg);
                 reg[0].parentNode.removeChild(reg[0]);
-                var groupID = $scope.regGroup._id;
+                var groupID = returnDataFromFactory._id;
                 $location.url('/dashboard/group/'+groupID);
             }
         });
