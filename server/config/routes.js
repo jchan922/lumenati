@@ -14,13 +14,19 @@ module.exports = function(app) {
     app.post('/register', users.register);
     app.post('/login', users.login);
     app.use(userAuth);
+
+    // Single User
     app.post('/logout', users.logout);
     app.get('/user', users.sessionUser);
     app.post('/marker/new', markers.add);
     app.get('/marker/show/all', markers.show_all);
     app.get('/marker/show/filter/food', markers.filter_food);
+
+    // Groups
     app.post('/group/new', groups.create);
-    app.post('/group/join', groups.join);    
+    app.post('/group/join', groups.join);
+    app.post('/marker/group/new/:_id', markers.addGroupMarker);
+    app.get('/marker/group/show/all/:_id', markers.show_group_all);    
 };
 
 

@@ -4,15 +4,77 @@
 //  *                                       *  //
 //  *****************************************  //
 
-app.controller('groupController', ['$scope', '$location', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, usersFactory, markersFactory, groupsFactory) {
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-// MARKER METHODS
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+app.controller('groupController', ['$scope', '$location', '$routeParams', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, $routeParams, usersFactory, markersFactory, groupsFactory) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GROUP METHODS
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// CREATE GROUP MARKER =====================================================================
+    $scope.addGroupMarker = function() {
+        $scope.newGroupMarker = {
+            title: title.value,
+            address: address.value,
+            category: category.value,
+            description: description.value,
+            url: url.value,
+            list: list.value,
+            latitude: latitude.value,
+            longitude: longitude.value
+        }
+        markersFactory.addGroupMarker($routeParams._id, $scope.newGroupMarker, function(returnDataFromFactory){
+            if(returnDataFromFactory.hasOwnProperty('errors')){
+                $scope.showAllMarkersErrors = returnDataFromFactory.errors;
+            } else {
+                showAllGroupMarkers();
+                $scope.newGroupMarker = {};
+            }
+        })
+    }
+
+// SHOW ALL GROUP MARKERS ==================================================================
+    var showAllGroupMarkers = function() {
+        console.log("***************** Got to CLIENT dashboardController.js showAllMarkers");
+        markersFactory.showAllGroupMarkers($routeParams._id, function(returnDataFromFactory){
+            if(returnDataFromFactory.hasOwnProperty('errors')){
+                $scope.showAllMarkersErrors = returnDataFromFactory.errors;
+            } else {
+                $scope.groupName = returnDataFromFactory.name
+                if(returnDataFromFactory.markers != undefined){
+                    $scope.markers_array = returnDataFromFactory.markers;
+                    $scope.markers = [];
+                        var markers_array = $scope.markers_array;
+                        var infoWindow = new google.maps.InfoWindow();
+                        var createMarker = function (info){
+                            var marker = new google.maps.Marker({
+                                position: new google.maps.LatLng(info.latitude, info.longitude),
+                                map: $scope.map,
+                                animation: google.maps.Animation.DROP,
+                                title: info.title,
+                                address: info.address,
+                                description: info.description,
+                                url: info.url,
+                                category: info.category,
+                                list: info.list,
+                                createdAt: info.createdAt
+                            });
+                            google.maps.event.addListener(marker, 'click', function(){
+                                if (marker.url){
+                                    infoWindow.setContent('<p><b>' + marker.title + '</b></p><p>' + marker.address + '</p><p><u>Category</u>: ' +  marker.category + '</p><p><u>Notes</u>: ' + marker.description + '</p><a href='+marker.url+'>Website</a>');
+                                } else {
+                                    infoWindow.setContent('<p><b>' + marker.title + '</b></p><p>' + marker.address + '</p><p><u>Category</u>: ' +  marker.category + '</p><p><u>Notes</u>: ' + marker.description + '</p>');
+                                }
+                                infoWindow.open($scope.map, marker);
+                            });
+                            $scope.markers.push(marker);
+                        }
+                        for (i = 0; i < markers_array.length; i++){
+                            createMarker(markers_array[i]);
+                    }
+                }
+            }
+        })
+    }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GOOGLE MAPS API METHODS
@@ -48,7 +110,7 @@ app.controller('groupController', ['$scope', '$location', 'usersFactory', 'marke
             marker.addListener('click', toggleBounce);
             marker.setPosition(pos);
             $scope.map = map;
-            // showAllGroupMarkers();
+            showAllGroupMarkers();
 
             // GOOGLE PLACES API AUTOCOMPLETE
             // Get the HTML input element for search for the autocomplete search box
@@ -74,47 +136,6 @@ app.controller('groupController', ['$scope', '$location', 'usersFactory', 'marke
         });
     }
     initMap();
-
-// SHOW ALL GROUP MARKERS ==================================================================
-    var showAllGroupMarkers = function() {
-        // console.log("***************** Got to CLIENT dashboardController.js showAllMarkers");
-        markersFactory.showAllMarkers(function(returnDataFromFactory){
-            if(returnDataFromFactory.hasOwnProperty('errors')){
-                $scope.showAllMarkersErrors = returnDataFromFactory.errors;
-            } else {
-                $scope.markers_array = returnDataFromFactory.markers;
-                $scope.markers = [];
-                    var markers_array = $scope.markers_array;
-                    var infoWindow = new google.maps.InfoWindow();
-                    var createMarker = function (info){
-                        var marker = new google.maps.Marker({
-                            position: new google.maps.LatLng(info.latitude, info.longitude),
-                            map: $scope.map,
-                            animation: google.maps.Animation.DROP,
-                            title: info.title,
-                            address: info.address,
-                            description: info.description,
-                            url: info.url,
-                            category: info.category,
-                            list: info.list,
-                            createdAt: info.createdAt
-                        });
-                        google.maps.event.addListener(marker, 'click', function(){
-                            if (marker.url){
-                                infoWindow.setContent('<p><b>' + marker.title + '</b></p><p>' + marker.address + '</p><p><u>Category</u>: ' +  marker.category + '</p><p><u>Notes</u>: ' + marker.description + '</p><a href='+marker.url+'>Website</a>');
-                            } else {
-                                infoWindow.setContent('<p><b>' + marker.title + '</b></p><p>' + marker.address + '</p><p><u>Category</u>: ' +  marker.category + '</p><p><u>Notes</u>: ' + marker.description + '</p>');
-                            }
-                            infoWindow.open($scope.map, marker);
-                        });
-                        $scope.markers.push(marker);
-                    }
-                    for (i = 0; i < markers_array.length; i++){
-                        createMarker(markers_array[i]);
-                }
-            }
-        })
-    }
 
 // AUTO FILL IN FORM ==================================================================
     var fillInForm = function(place) {
@@ -148,7 +169,6 @@ app.controller('groupController', ['$scope', '$location', 'usersFactory', 'marke
         $scope.markerForm = markerForm;
     };
 
-
     var toggleBounce = function() {
         if (marker.getAnimation() !== null) {
             marker.setAnimation(null);
@@ -166,27 +186,26 @@ app.controller('groupController', ['$scope', '$location', 'usersFactory', 'marke
 
 
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CURRENT USER METHODS
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // GET CURRENT USER =============================================================================
-        var getSessionUser = function(){
-            usersFactory.getSessionUser(function(user){
-                $scope.session_user = user;
-                $scope.userGroups = user.groups
-                // console.log("**** Now useable as $scope variable", user);
-            })
-        };
-        getSessionUser();
+    var getSessionUser = function(){
+        usersFactory.getSessionUser(function(user){
+            $scope.session_user = user;
+            $scope.userGroups = user.groups
+            // console.log("**** Now useable as $scope variable", user);
+        })
+    };
+    getSessionUser();
 
 // LOG OUT A USER ===============================================================================
-        $scope.logout = function() {
-            usersFactory.logout(function(){
-                $location.url('/login')
-            });
-        };
+    $scope.logout = function() {
+        usersFactory.logout(function(){
+            $location.url('/login')
+        });
+    };
 
 
 

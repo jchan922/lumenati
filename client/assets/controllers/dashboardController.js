@@ -64,8 +64,8 @@ app.controller('dashboardController', ['$scope', '$location', 'usersFactory', 'm
                 var reg = document.getElementsByClassName("modal-backdrop fade in");
                 console.log(reg);
                 reg[0].parentNode.removeChild(reg[0]);
-                var groupName = $scope.regGroup.name;
-                $location.url('/dashboard/group/'+groupName);
+                var groupID = $scope.regGroup._id;
+                $location.url('/dashboard/group/'+groupID);
             }
         });
     };
@@ -74,15 +74,14 @@ app.controller('dashboardController', ['$scope', '$location', 'usersFactory', 'm
     $scope.joinGroup = function() {
         // console.log("***************** Got to CLIENT loginController.js registerUser".green);
         groupsFactory.join($scope.join, function(returnDataFromFactory){
-            console.log($scope.join);
             if(returnDataFromFactory.hasOwnProperty('errors')){
                 $scope.regErrors = returnDataFromFactory.errors;
             } else {
                 var reg = document.getElementsByClassName("modal-backdrop fade in");
                 console.log(reg);
                 reg[0].parentNode.removeChild(reg[0]);
-                var groupName = $scope.join.name;
-                $location.url('/dashboard/group/'+groupName);
+                var groupID = $scope.join._id;
+                $location.url('/dashboard/group/'+groupID);
             }
         });
     };

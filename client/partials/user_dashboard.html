@@ -21,8 +21,15 @@
 
     <div class="container-fluid">
         <div class="row">
+            <div class="col-md-12">
+                <h2 class="redText">MY MAP</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
             <div class="col-md-2">
-                <h2>MY MAP</h2>
                 <h3>Markers</h3>
                 <form ng-submit="addMarker(newMarker)">
                     <div class="form-group">
@@ -141,7 +148,7 @@
                             <div class="col-md-4" id="current_groups">
                                 <h3>Current Groups</h3>
                                 <ul ng-repeat="group in userGroups">
-                                    <li><a href="#/dashboard/group/{{group.name}}">{{group.name}}</a></li>
+                                    <li><a href="#/dashboard/group/{{group._id}}">{{group.name}}</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-4" id="select_group">
