@@ -4,7 +4,7 @@
 //  *                                       *  //
 //  *****************************************  //
 
-app.controller('groupController', ['$scope', '$location', '$routeParams', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, $routeParams, usersFactory, markersFactory, groupsFactory) {
+app.controller('groupDashboardController', ['$scope', '$location', '$routeParams', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, $routeParams, usersFactory, markersFactory, groupsFactory) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GROUP METHODS
