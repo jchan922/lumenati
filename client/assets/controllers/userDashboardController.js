@@ -280,7 +280,7 @@ app.controller('userDashboardController', ['$scope', '$location', '$routeParams'
         console.log(reg);
         reg[0].parentNode.removeChild(reg[0]);
         console.log(reg);
-        $location.url('/dashboard/group/'+group_id)
+        $location.url('/profile/group/'+group_id)
         $scope.regGroup = {}
         $scope.join = {}
     };

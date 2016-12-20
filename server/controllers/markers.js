@@ -151,11 +151,12 @@ module.exports = {
 
     // SHOW ALL MARKERS TO CURRENT GROUP ===========================================================================
     show_group_all: function(req,res){
-        Group.findOne({_id:req.params._id}).populate('markers').exec(function(err,markers){
+        Group.findOne({_id:req.params._id}).populate({path: 'markers', options: { limit: 5 }}).populate('members').populate('_creator').exec(function(err,markers){
             if(err){
                 console.log("Something went wrong in Group");
                 res.json(err);
             } else {
+                console.log(markers);
                 res.json(markers);
             }
         })

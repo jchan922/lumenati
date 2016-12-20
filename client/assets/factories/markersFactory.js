@@ -67,7 +67,7 @@ app.factory('markersFactory', ['$http', '$routeParams', function($http, $routePa
 // SHOW ALL GROUP MARKERS METHOD TO SERVER =============================================================
     factory.showAllGroupMarkers = function(group_id, callback){
         $http.get('/marker/group/show/all/'+group_id).then(function(returnedDataFromServer){
-            // console.log("**** Response from server is: ", returnedDataFromServer.data);
+            console.log("**** Response from server is: ", returnedDataFromServer.data);
             if(typeof(callback) == 'function'){
                 callback(returnedDataFromServer.data);
             }

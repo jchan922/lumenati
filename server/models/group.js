@@ -14,9 +14,9 @@ var GroupSchema = new mongoose.Schema({
     name: {type:String, required:true},
     password: {type:String, minlength:8},
     public: {type:Boolean, default: false},
-    members: [{type:Schema.Types.ObjectId, ref:'Member'}],
+    members: [{type:Schema.Types.ObjectId, ref:'User'}],
     markers: [{type:Schema.Types.ObjectId, ref:'Marker'}],
-    _creator: {type:Schema.Types.ObjectId, ref:'Creator'},
+    _creator: {type:Schema.Types.ObjectId, ref:'User'},
 }, {timestamps:true});
 
 // register the schema as a model

@@ -19,7 +19,7 @@ var MarkerSchema = new mongoose.Schema({
     list: {type: String},
     latitude: {type: Number},
     longitude: {type: Number},
-    _creator: {type:Schema.Types.ObjectId, ref:'Creator'},
+    _creator: {type:Schema.Types.ObjectId, ref:'User'},
 }, {timestamps:true});
 
 // register the schema as a model

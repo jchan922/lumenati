@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="assets/css/group_profile.css">
+
 <div ng-controller="groupProfileController">
 
     <nav class="navbar navbar-default">
@@ -20,34 +22,36 @@
     </nav>
 
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6">
-                <h2>User Name</h2>
-                <ul>
-                    <li>First Name</li>
-                    <li>Last Name</li>
-                    <li>Email</li>
+        <div class="row" id="top_row">
+            <div class="col-md-12">
+                <h1 class="redText">{{currentGroup.name}}</h1>
+            </div>
+        </div>
+        <div class="row" id="middle_row">
+            <div class="col-md-4">
+                <h2>LATEST MARKERS</h2>
+                <ul ng-repeat="marker in currentGroup.markers">
+                    <li><b>{{marker.title}}</b> - {{marker.category}}<br>{{marker.address}}</li>
                 </ul>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
+                <h2></h2>
             </div>
-
+            <div class="col-md-4">
+                <h2>GROUP MEMBERS</h2>
+                <p>Created On: {{currentGroup.createdAt}}</p>
+                <ul ng-repeat="member in currentGroup.members">
+                    <li>{{member.first_name}} {{member.last_name}}</li>
+                </ul>
+            </div>
         </div>
-    </div>
-
-    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4">
-                <h2>Biography</h2>
-            </div>
-            <div class="col-md-4">
-                <h2>Recent Markers</h2>
-            </div>
-            <div class="col-md-4">
-                <h2>Current Groups</h2>
+            <div class="col-sm-12">
+                <div id="map"></div>
             </div>
         </div>
     </div>
+
 
     <!-- Begin Create Group Modal -->
     <div class="modal fade" id="group" tabindex="-1" role="dialog">
@@ -63,7 +67,7 @@
                             <div class="col-md-4" id="current_groups">
                                 <h3>Current Groups</h3>
                                 <ul ng-repeat="group in userGroups">
-                                    <li><a href="#/dashboard/group/{{group._id}}">{{group.name}}</a></li>
+                                    <li><a href="" ng-click="cancel(group._id)">{{group.name}}</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-4" id="select_group">
