@@ -32,6 +32,8 @@ app.controller('groupController', ['$scope', '$location', '$routeParams', 'users
         })
     }
 
+
+
 // SHOW ALL GROUP MARKERS ==================================================================
     var showAllGroupMarkers = function() {
         console.log("***************** Got to CLIENT dashboardController.js showAllMarkers");
@@ -75,6 +77,46 @@ app.controller('groupController', ['$scope', '$location', '$routeParams', 'users
             }
         })
     }
+
+
+// CREATE NEW GROUP ========================================================================
+    $scope.registerGroup = function() {
+        // console.log("***************** Got to CLIENT loginController.js registerUser".green);
+        groupsFactory.create($scope.regGroup, function(returnDataFromFactory){
+            // console.log(returnDataFromFactory);
+            if(returnDataFromFactory.hasOwnProperty('errors')){
+                $scope.regErrors = returnDataFromFactory.errors;
+            } else {
+                console.log(returnDataFromFactory._id);
+                var reg = document.getElementsByClassName("modal-backdrop fade in");
+                console.log(reg);
+                reg[0].parentNode.removeChild(reg[0]);
+                var groupID = returnDataFromFactory._id;
+                $scope.regGroup = {}
+                $scope.join = {}
+                $location.url('/dashboard/group/'+groupID);
+            }
+        });
+    };
+
+// JOIN EXISTING GROUP ======================================================================
+    $scope.joinGroup = function() {
+        // console.log("***************** Got to CLIENT loginController.js registerUser".green);
+        groupsFactory.join($scope.join, function(returnDataFromFactory){
+            if(returnDataFromFactory.hasOwnProperty('errors')){
+                $scope.regErrors = returnDataFromFactory.errors;
+            } else {
+                var reg = document.getElementsByClassName("modal-backdrop fade in");
+                console.log(reg);
+                reg[0].parentNode.removeChild(reg[0]);
+                var groupID = returnDataFromFactory._id;
+                $scope.regGroup = {}
+                $scope.join = {}
+                $location.url('/dashboard/group/'+groupID);
+            }
+        });
+    };
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GOOGLE MAPS API METHODS
@@ -207,6 +249,22 @@ app.controller('groupController', ['$scope', '$location', '$routeParams', 'users
         });
     };
 
+
+
+////////////////////////////////////////////
+// MISC. FUNCTIONS
+///////////////////////////////////////////
+
+    $scope.cancel = function (group_id) {
+        console.log(group_id);
+        var reg = document.getElementsByClassName("modal-backdrop fade in");
+        console.log(reg);
+        reg[0].parentNode.removeChild(reg[0]);
+        console.log(reg);
+        $location.url('/dashboard/group/'+group_id)
+        $scope.regGroup = {}
+        $scope.join = {}
+    };
 
 
 }]);

@@ -30,11 +30,11 @@ app.config(function ($routeProvider, $httpProvider) {
             templateUrl: 'partials/group_dashboard.html'
         })
         .when('/profile/:_id',{
-            templateUrl: 'partials/profile.html'
+            templateUrl: 'partials/user_profile.html'
         })
-        // .when('/orders',{
-        //     templateUrl: 'partials/orders.html'
-        // })
+        .when('/profile/group/:_id',{
+            templateUrl: 'partials/group_profile.html'
+        })
         // .when('/products',{
         //     templateUrl: 'partials/products.html'
         // })

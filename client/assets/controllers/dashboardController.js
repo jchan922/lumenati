@@ -4,7 +4,7 @@
 //  *                                       *  //
 //  *****************************************  //
 
-app.controller('dashboardController', ['$scope', '$location', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, usersFactory, markersFactory, groupsFactory) {
+app.controller('dashboardController', ['$scope', '$location', '$routeParams', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, routeParams, usersFactory, markersFactory, groupsFactory) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MARKER METHODS
@@ -66,6 +66,8 @@ app.controller('dashboardController', ['$scope', '$location', 'usersFactory', 'm
                 console.log(reg);
                 reg[0].parentNode.removeChild(reg[0]);
                 var groupID = returnDataFromFactory._id;
+                $scope.regGroup = {}
+                $scope.join = {}
                 $location.url('/dashboard/group/'+groupID);
             }
         });
@@ -81,7 +83,9 @@ app.controller('dashboardController', ['$scope', '$location', 'usersFactory', 'm
                 var reg = document.getElementsByClassName("modal-backdrop fade in");
                 console.log(reg);
                 reg[0].parentNode.removeChild(reg[0]);
-                var groupID = $scope.join._id;
+                var groupID = returnDataFromFactory._id;
+                $scope.regGroup = {}
+                $scope.join = {}
                 $location.url('/dashboard/group/'+groupID);
             }
         });
@@ -247,23 +251,38 @@ app.controller('dashboardController', ['$scope', '$location', 'usersFactory', 'm
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // GET CURRENT USER =============================================================================
-        var getSessionUser = function(){
-            usersFactory.getSessionUser(function(user){
-                $scope.session_user = user;
-                $scope.userGroups = user.groups
-                // console.log("**** Now useable as $scope variable", user);
-            })
-        };
-        getSessionUser();
+    var getSessionUser = function(){
+        usersFactory.getSessionUser(function(user){
+            $scope.session_user = user;
+            $scope.userGroups = user.groups
+            // console.log("**** Now useable as $scope variable", user);
+        })
+    };
+    getSessionUser();
 
 // LOG OUT A USER ===============================================================================
-        $scope.logout = function() {
-            usersFactory.logout(function(){
-                $location.url('/login')
-            });
-        };
+    $scope.logout = function() {
+        usersFactory.logout(function(){
+            $location.url('/login')
+        });
+    };
 
 
+
+////////////////////////////////////////////
+// MISC. FUNCTIONS
+///////////////////////////////////////////
+
+    $scope.cancel = function (group_id) {
+        console.log(group_id);
+        var reg = document.getElementsByClassName("modal-backdrop fade in");
+        console.log(reg);
+        reg[0].parentNode.removeChild(reg[0]);
+        console.log(reg);
+        $location.url('/dashboard/group/'+group_id)
+        $scope.regGroup = {}
+        $scope.join = {}
+    };
 
 }]);
 

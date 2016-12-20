@@ -66,7 +66,7 @@ module.exports = {
                                     if(err){
                                         res.json(err);
                                     } else {
-                                        res.sendStatus(200)
+                                        res.json(foundGroup)
                                         console.log("***************** Group joined and added to User".green);
                                     }
                                 })

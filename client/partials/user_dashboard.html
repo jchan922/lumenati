@@ -6,11 +6,11 @@
                 <div class="col-md-12">
                     <ul id="nav_ul">
                         <li><h4><span class="glyphicon glyphicon-eye-open"></span> Welcome, {{session_user.first_name}}!</h4></li>
-                        <li><a href="#/dashboard/{{session_user.username}}" ng-click="">My Map</a></li>
+                        <li><a href="#/dashboard/{{session_user.username}}">My Map</a></li>
                         |
                         <li><a href="" class="card-link" type="button" data-toggle="modal" data-target="#group">Groups</a></li>
                         |
-                        <li><a href="#" ng-click="">Profile</a></li>
+                        <li><a href="#/profile/{{session_user.username}}" ng-click="">Profile</a></li>
                         |
                         <li><a href="#" ng-click="logout()">Logout</a></li>
                     </ul>
@@ -21,15 +21,8 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
-                <h2 class="redText">MY MAP</h2>
-            </div>
-        </div>
-    </div>
-
-    <div class="container-fluid">
-        <div class="row">
             <div class="col-md-2">
+                <h2 class="redText">{{session_user.first_name}}'s Map</h2>
                 <h3>Markers</h3>
                 <form ng-submit="addMarker(newMarker)">
                     <div class="form-group">
@@ -148,7 +141,7 @@
                             <div class="col-md-4" id="current_groups">
                                 <h3>Current Groups</h3>
                                 <ul ng-repeat="group in userGroups">
-                                    <li><a href="#/dashboard/group/{{group._id}}">{{group.name}}</a></li>
+                                    <li><a href="" ng-click="cancel(group._id)">{{group.name}}</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-4" id="select_group">
