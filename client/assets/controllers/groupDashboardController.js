@@ -87,9 +87,7 @@ app.controller('groupDashboardController', ['$scope', '$location', '$routeParams
             if(returnDataFromFactory.hasOwnProperty('errors')){
                 $scope.regErrors = returnDataFromFactory.errors;
             } else {
-                console.log(returnDataFromFactory._id);
                 var reg = document.getElementsByClassName("modal-backdrop fade in");
-                console.log(reg);
                 reg[0].parentNode.removeChild(reg[0]);
                 var groupID = returnDataFromFactory._id;
                 $scope.regGroup = {}
@@ -107,7 +105,6 @@ app.controller('groupDashboardController', ['$scope', '$location', '$routeParams
                 $scope.regErrors = returnDataFromFactory.errors;
             } else {
                 var reg = document.getElementsByClassName("modal-backdrop fade in");
-                console.log(reg);
                 reg[0].parentNode.removeChild(reg[0]);
                 var groupID = returnDataFromFactory._id;
                 $scope.regGroup = {}
@@ -122,59 +119,55 @@ app.controller('groupDashboardController', ['$scope', '$location', '$routeParams
 // GOOGLE MAPS API METHODS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// GET LAST MARKER CREATED ==========================================================================
+    var getLastMarkerCreated = function() {
+        groupsFactory.getLastMarkerCreated($routeParams._id, function(returnDataFromFactory){
+            if(returnDataFromFactory.hasOwnProperty('errors')){
+                $scope.showAllMarkersErrors = returnDataFromFactory.errors;
+            } else {
+                $scope.lastMarker = returnDataFromFactory
+                console.log(returnDataFromFactory);
+                initMap(returnDataFromFactory.latitude,returnDataFromFactory.longitude)
+            }
+        })
+    }
+    getLastMarkerCreated()
+
 // INITIALIZE GOOGLE MAPS
-    var initMap = function(){
-        // Find HTML5 geolocation.
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-            var map = new google.maps.Map(document.getElementById('map'), {
-                    center: pos,
-                    zoom: 16,
-                });
-            var marker = new google.maps.Marker({
-                    map: map,draggable: true,
-                    animation: google.maps.Animation.DROP,
-                    position: pos,
-                    title: "Current Location!",
-                    icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-                });
-            // CURRENT LOCATION EVENT LISTENER
-            var infoWindow = new google.maps.InfoWindow();
-            google.maps.event.addListener(marker, 'click', function(){
-                infoWindow.setContent('<h3>Current Location!</h3>');
-                infoWindow.open($scope.map, marker);
+    var initMap = function(latitude,longitude){
+        var pos = {
+                lat: latitude,
+                lng: longitude
+            };
+        var map = new google.maps.Map(document.getElementById('map'), {
+                center: pos,
+                zoom: 15,
+                styles: [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2e5d4"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]}],
             });
+        map.setCenter(pos);
+        $scope.map = map;
+        showAllGroupMarkers();
+
+        // GOOGLE PLACES API AUTOCOMPLETE
+        // Get the HTML input element for search for the autocomplete search box
+        var input = document.getElementById('pac-input');
+        // Create the autocomplete object.
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        // Event Listener for a Places API search
+        google.maps.event.addListener(autocomplete, 'place_changed', function(){
+            var infoWindow = new google.maps.InfoWindow({map: map});
+            var place = autocomplete.getPlace();
+            var contentString = '<p><b>'+place.name+'</b></p>'+
+                                '<p>'+place.formatted_address+'</p>';
+            var pos = {
+                    lat: place.geometry.location.lat(),
+                    lng: place.geometry.location.lng()
+                };
+            fillInForm(place);
 
             map.setCenter(pos);
-            marker.addListener('click', toggleBounce);
-            marker.setPosition(pos);
-            $scope.map = map;
-            showAllGroupMarkers();
-
-            // GOOGLE PLACES API AUTOCOMPLETE
-            // Get the HTML input element for search for the autocomplete search box
-            var input = document.getElementById('pac-input');
-            // Create the autocomplete object.
-            var autocomplete = new google.maps.places.Autocomplete(input);
-            // Event Listener for a Places API search
-            google.maps.event.addListener(autocomplete, 'place_changed', function(){
-                var infoWindow = new google.maps.InfoWindow({map: map});
-                var place = autocomplete.getPlace();
-                var contentString = '<p><b>'+place.name+'</b></p>'+
-                                    '<p>'+place.formatted_address+'</p>';
-                var pos = {
-                        lat: place.geometry.location.lat(),
-                        lng: place.geometry.location.lng()
-                    };
-                fillInForm(place);
-
-                map.setCenter(pos);
-                infoWindow.setPosition(pos);
-                infoWindow.setContent(contentString);
-            });
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(contentString);
         });
     }
     initMap();
@@ -256,11 +249,8 @@ app.controller('groupDashboardController', ['$scope', '$location', '$routeParams
 ///////////////////////////////////////////
 
     $scope.cancel = function (group_id) {
-        console.log(group_id);
         var reg = document.getElementsByClassName("modal-backdrop fade in");
-        console.log(reg);
         reg[0].parentNode.removeChild(reg[0]);
-        console.log(reg);
         $location.url('/profile/group/'+group_id)
         $scope.regGroup = {}
         $scope.join = {}

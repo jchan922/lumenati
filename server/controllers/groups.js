@@ -78,7 +78,21 @@ module.exports = {
         })
     },
 
-
+// GET LAST MARKER CREATED FOR GROUP INTO BATABASE ===============================================================================
+    lastmarker: function(req,res){
+        Group.findOne({_id: req.params._id}).populate('markers').exec(function(err,foundGroup){
+            if(!foundGroup){
+                var errors = {errors:{
+                    general:{message:"Invalid group information."}
+                    }
+                }
+                res.json(errors);
+            } else {
+                var lastMarker = foundGroup.markers[foundGroup.markers.length-1]
+                res.json(lastMarker)
+            }
+        })
+    },
 
 
 

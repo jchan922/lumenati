@@ -32,7 +32,14 @@ app.factory('groupsFactory', ['$http', '$routeParams', function($http, $routePar
     };
 
 
-
+    factory.getLastMarkerCreated = function(group_id,callback){
+        $http.get('/group/lastmarker/'+group_id).then(function(returnedDataFromServer){
+            // console.log("Response from server is: ", returnedDataFromServer.data);
+            if(typeof(callback) == 'function'){
+                callback(returnedDataFromServer.data);
+            }
+        })
+    };
 
 
 

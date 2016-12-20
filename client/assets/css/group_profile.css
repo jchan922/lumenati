@@ -24,20 +24,21 @@
         }
 
 h3 {
-    text-align: left;
+    text-align: center;
     display: block;
 }
 
-h1, h2 {
-    text-align: center;
+h1 {
+    text-align: left;
 }
 
 #top_row {
     height: 150px;
 }
 
+
 #middle_row {
-    height: 400px;
+    height: 500px;
 }
 
 

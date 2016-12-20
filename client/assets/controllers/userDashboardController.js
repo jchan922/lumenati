@@ -61,9 +61,8 @@ app.controller('userDashboardController', ['$scope', '$location', '$routeParams'
             if(returnDataFromFactory.hasOwnProperty('errors')){
                 $scope.regErrors = returnDataFromFactory.errors;
             } else {
-                console.log(returnDataFromFactory._id);
                 var reg = document.getElementsByClassName("modal-backdrop fade in");
-                console.log(reg);
+
                 reg[0].parentNode.removeChild(reg[0]);
                 var groupID = returnDataFromFactory._id;
                 $scope.regGroup = {}
@@ -81,7 +80,7 @@ app.controller('userDashboardController', ['$scope', '$location', '$routeParams'
                 $scope.regErrors = returnDataFromFactory.errors;
             } else {
                 var reg = document.getElementsByClassName("modal-backdrop fade in");
-                console.log(reg);
+
                 reg[0].parentNode.removeChild(reg[0]);
                 var groupID = returnDataFromFactory._id;
                 $scope.regGroup = {}
@@ -275,11 +274,8 @@ app.controller('userDashboardController', ['$scope', '$location', '$routeParams'
 ///////////////////////////////////////////
 
     $scope.cancel = function (group_id) {
-        console.log(group_id);
         var reg = document.getElementsByClassName("modal-backdrop fade in");
-        console.log(reg);
         reg[0].parentNode.removeChild(reg[0]);
-        console.log(reg);
         $location.url('/profile/group/'+group_id)
         $scope.regGroup = {}
         $scope.join = {}

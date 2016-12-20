@@ -22,36 +22,44 @@
     </nav>
 
     <div class="container-fluid">
+
         <div class="row" id="top_row">
-            <div class="col-md-12">
+            <div class="col-md-10">
                 <h1 class="redText">{{currentGroup.name}}</h1>
-            </div>
-        </div>
-        <div class="row" id="middle_row">
-            <div class="col-md-4">
-                <h2>LATEST MARKERS</h2>
-                <ul ng-repeat="marker in currentGroup.markers">
-                    <li><b>{{marker.title}}</b> - {{marker.category}}<br>{{marker.address}}</li>
-                </ul>
-            </div>
-            <div class="col-md-4">
-                <h2></h2>
-            </div>
-            <div class="col-md-4">
-                <h2>GROUP MEMBERS</h2>
                 <p>Created On: {{currentGroup.createdAt}}</p>
-                <ul ng-repeat="member in currentGroup.members">
-                    <li>{{member.first_name}} {{member.last_name}}</li>
-                </ul>
+                <button type="button" class="btn btn-default"><a href="#/dashboard/group/{{currentGroup._id}}">Add New Markers</a></button>
             </div>
+            <div class="col-md-2">
+                <h1><button type="button" class="btn btn-danger">Delete Map</button></h1>
+            </div>
+        <div class="row" id="middle_row">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                      <h3 class="card-header">LATEST MARKERS</h3>
+                      <div class="card-block">
+                          <ul ng-repeat="marker in currentGroup.markers">
+                              <li><b>{{marker.title}}</b> - <i>{{marker.category}}</i><br>{{marker.address}}</li>
+                          </ul>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3>GROUP MEMBERS</h3>
+                    <ul ng-repeat="member in currentGroup.members">
+                        <li>{{member.first_name}} {{member.last_name}}</li>
+                    </ul>
+                </div>
         </div>
+
         <div class="row">
             <div class="col-sm-12">
                 <div id="map"></div>
             </div>
         </div>
-    </div>
 
+    </div>
 
     <!-- Begin Create Group Modal -->
     <div class="modal fade" id="group" tabindex="-1" role="dialog">
