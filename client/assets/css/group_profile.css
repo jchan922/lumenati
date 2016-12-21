@@ -1,7 +1,11 @@
-.redText {
-    color: red;
+body {
+    background-color: #e6edf2;
+    color: #3a3a3a;
 }
 
+.redText {
+    color: #ed4e6b;
+}
 .navbar {
     padding: 10px 0px;
     margin: 0px;
@@ -33,14 +37,25 @@ h1 {
 }
 
 #top_row {
-    height: 150px;
+    height: 175px;
 }
 
 
 #middle_row {
-    height: 500px;
+    height: 350px;
+    margin-bottom: 25px;
 }
 
+    .noresize {
+        resize: none;
+        margin-bottom: 5px;
+    }
+
+
+#bottom_row {
+    margin-top: 5px;
+    height: 400px;
+}
 
     #map {
         height: 400px;

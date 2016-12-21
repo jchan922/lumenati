@@ -1,5 +1,10 @@
+body {
+    background-color: #e6edf2;
+    color: #3a3a3a;
+}
+
 .redText {
-    color: red;
+    color: #ed4e6b;
 }
 
 .navbar {

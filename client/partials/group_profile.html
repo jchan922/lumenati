@@ -24,36 +24,42 @@
     <div class="container-fluid">
 
         <div class="row" id="top_row">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <h1 class="redText">{{currentGroup.name}}</h1>
                 <p>Created On: {{currentGroup.createdAt}}</p>
                 <button type="button" class="btn btn-default"><a href="#/dashboard/group/{{currentGroup._id}}">Add New Markers</a></button>
+                <button type="button" class="btn btn-danger">Delete Map</button>
             </div>
-            <div class="col-md-2">
-                <h1><button type="button" class="btn btn-danger">Delete Map</button></h1>
-            </div>
-        <div class="row" id="middle_row">
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                      <h3 class="card-header">LATEST MARKERS</h3>
-                      <div class="card-block">
-                          <ul ng-repeat="marker in currentGroup.markers">
-                              <li><b>{{marker.title}}</b> - <i>{{marker.category}}</i><br>{{marker.address}}</li>
-                          </ul>
-                      </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <h3>GROUP MEMBERS</h3>
-                    <ul ng-repeat="member in currentGroup.members">
-                        <li>{{member.first_name}} {{member.last_name}}</li>
-                    </ul>
-                </div>
         </div>
 
-        <div class="row">
+        <div class="row" id="middle_row">
+            <div class="col-md-4">
+                <h3>GROUP STATUS</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut</p>
+                <div class="form-group">
+                  <textarea class="form-control noresize" rows="3" id="comment"></textarea>
+                  <input type="submit" class="btn btn-default" value="Update">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                  <h3 class="card-header">LATEST MARKERS</h3>
+                  <div class="card-block">
+                      <ul ng-repeat="marker in currentGroup.markers | orderBy:'-createdAt' | limitTo:5">
+                          <li><b>{{marker.title}}</b> - <i>{{marker.category}}</i><br>{{marker.address}}</li>
+                      </ul>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h3>GROUP MEMBERS</h3>
+                <ul ng-repeat="member in currentGroup.members">
+                    <li>{{member.first_name}} {{member.last_name}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row" id="bottom_row">
             <div class="col-sm-12">
                 <div id="map"></div>
             </div>

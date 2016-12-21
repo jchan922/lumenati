@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-md-2">
                 <h2 class="redText">{{session_user.first_name}}'s Map</h2>
-                <h3>Markers</h3>
+                <h4>Markers</h4>
                 <form ng-submit="addMarker(newMarker)">
                     <div class="form-group">
                         <p>Add a new marker: </p>
@@ -68,7 +68,7 @@
                             <input type="text" class="form-control" id="longitude" placeholder="Longitude" disabled="true" ng-model="newMarker.longitude" value="">
                         </div>
                         <p class="redText">{{newMarkerErrors.coordinates}}</p>
-                        <input type="submit" class="btn btn-primary" value="Add Marker">
+                        <input type="submit" class="btn btn-default" value="Add Marker">
 
                     </div>
                 </form>
@@ -80,7 +80,7 @@
                 2) Checkbox runs function that runs a sort of only that specfic category
                 3) Uncheck restores show all -->
 
-                <h3>Filter</h3>
+                <h4>Filter</h4>
                 <ul id="sort_category">
                     <li ng-repeat="category in category_array"><input type="checkbox"><h4> {{category}} </h4></li>
                     <div class="checkbox">
