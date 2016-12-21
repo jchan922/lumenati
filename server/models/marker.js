@@ -16,7 +16,6 @@ var MarkerSchema = new mongoose.Schema({
     category: {type:String},
     description: {type:String},
     url: {type:String},
-    list: {type: String},
     latitude: {type: Number},
     longitude: {type: Number},
     _creator: {type:Schema.Types.ObjectId, ref:'User'},

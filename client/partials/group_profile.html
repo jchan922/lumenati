@@ -27,7 +27,7 @@
             <div class="col-md-12">
                 <h1 class="redText">{{currentGroup.name}}</h1>
                 <p>Created On: {{currentGroup.createdAt}}</p>
-                <button type="button" class="btn btn-default"><a href="#/dashboard/group/{{currentGroup._id}}">Add New Markers</a></button>
+                <button type="button" class="btn btn-success"><a id="add_button" href="#/dashboard/group/{{currentGroup._id}}">Add New Markers</a></button>
                 <button type="button" class="btn btn-danger">Delete Map</button>
             </div>
         </div>
@@ -44,9 +44,10 @@
             <div class="col-md-4">
                 <div class="card">
                   <h3 class="card-header">LATEST MARKERS</h3>
+                  <p>{{noMarkers}}</p>
                   <div class="card-block">
                       <ul ng-repeat="marker in currentGroup.markers | orderBy:'-createdAt' | limitTo:5">
-                          <li><b>{{marker.title}}</b> - <i>{{marker.category}}</i><br>{{marker.address}}</li>
+                          <li><b>{{marker.title}}</b> - <i>{{marker.category}}</i><br>{{marker.address}}<br></li>
                       </ul>
                   </div>
                 </div>

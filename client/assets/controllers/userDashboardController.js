@@ -19,7 +19,6 @@ app.controller('userDashboardController', ['$scope', '$location', '$routeParams'
             category: category.value,
             description: description.value,
             url: url.value,
-            list: list.value,
             latitude: latitude.value,
             longitude: longitude.value
         }

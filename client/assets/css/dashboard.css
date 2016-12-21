@@ -6,7 +6,6 @@ body {
 .redText {
     color: #ed4e6b;
 }
-
 .navbar {
     padding: 10px 0px;
     margin: 0px;
@@ -35,6 +34,11 @@ h3 {
 
 h1 {
     text-align: center;
+}
+
+.noresize {
+    resize: none;
+    margin-bottom: 5px;
 }
 
     #map {

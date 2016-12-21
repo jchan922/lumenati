@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group">
                             <select class="form-control" id="category" placeholder="Category" ng-model="newGroupMarker.category" value="">
-                                <option value="" disabled selected>Select A Category...</option>
+                                <option value="" disabled selected>Select A Category...(optional)</option>
                                 <option value="Food">Food</option>
                                 <option value="Coffee">Coffee</option>
                                 <option value="Bar/Nightlife">Bar/Nightlife</option>
@@ -55,13 +55,10 @@
                             <input type="text" class="form-control" id="category" placeholder="Category" ng-model="newMarker.category">
                         </div> -->
                         <div class="form-group">
-                            <textarea type="textarea" class="form-control" id="description" placeholder="Description" ng-model="newGroupMarker.description" value=""></textarea>
+                            <textarea type="textarea" class="form-control noresize" id="description" placeholder="Description" ng-model="newGroupMarker.description" value=""></textarea>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="url" placeholder="URL (optional)" ng-model="newGroupMarker.url" value="">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="list" placeholder="Add to a list (optional)" ng-model="newGroupMarker.list" value="">
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="latitude" placeholder="Latitude" disabled="true" ng-model="newGroupMarker.latitude" value="">
@@ -79,7 +76,7 @@
                 2) Checkbox runs function that runs a sort of only that specfic category
                 3) Uncheck restores show all -->
 
-                <h4>Filter</h4>
+                <!-- <h4>Filter</h4>
                 <ul id="sort_category">
                     <li ng-repeat="category in category_array"><input type="checkbox"><h4> {{category}} </h4></li>
                     <div class="checkbox">
@@ -109,7 +106,7 @@
                     <div class="checkbox">
                         <label><input type="checkbox" value="">Hotel</label>
                     </div>
-                </ul>
+                </ul> -->
 
                 <!-- <ul id="ul_bookmark">
                     <li ng-repeat="bookmark in allUserBookmarks"><input type="checkbox" ng-checked="bookmark.done == true" ng-model="form.done" ng-click="checkbox(bookmark._id)"><b>{{bookmark._creator.name}}</b> | {{bookmark.title}} - {{bookmark.description}} -- {{bookmark.createdAt | date: "MMM dd, yyyy"}}</li>

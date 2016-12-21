@@ -6,9 +6,14 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
             if(returnDataFromFactory.hasOwnProperty('errors')){
                 $scope.showAllMarkersErrors = returnDataFromFactory.errors;
             } else {
-                $scope.lastMarker = returnDataFromFactory
-                console.log(returnDataFromFactory);
-                initMap(returnDataFromFactory.latitude,returnDataFromFactory.longitude)
+                if(!returnDataFromFactory){
+                    $scope.noMarkers = "NO MARKERS YET!!"
+                    initMap(34.1375902,-118.3551984);
+                } else {
+                    $scope.lastMarker = returnDataFromFactory
+                    console.log(returnDataFromFactory);
+                    initMap(returnDataFromFactory.latitude,returnDataFromFactory.longitude);
+                }
             }
         })
     }

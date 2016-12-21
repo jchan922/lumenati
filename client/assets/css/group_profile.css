@@ -40,22 +40,21 @@ h1 {
     height: 175px;
 }
 
+    #add_button {
+        color: white;
+        text-decoration: none;
+    }
+
 
 #middle_row {
-    height: 350px;
-    margin-bottom: 25px;
+    height: 325px;
+    margin-bottom: 15px;
 }
 
     .noresize {
         resize: none;
         margin-bottom: 5px;
     }
-
-
-#bottom_row {
-    margin-top: 5px;
-    height: 400px;
-}
 
     #map {
         height: 400px;

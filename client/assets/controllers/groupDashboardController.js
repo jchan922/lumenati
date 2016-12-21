@@ -18,7 +18,6 @@ app.controller('groupDashboardController', ['$scope', '$location', '$routeParams
             category: category.value,
             description: description.value,
             url: url.value,
-            list: list.value,
             latitude: latitude.value,
             longitude: longitude.value
         }
@@ -31,8 +30,6 @@ app.controller('groupDashboardController', ['$scope', '$location', '$routeParams
             }
         })
     }
-
-
 
 // SHOW ALL GROUP MARKERS ==================================================================
     var showAllGroupMarkers = function() {
@@ -115,6 +112,44 @@ app.controller('groupDashboardController', ['$scope', '$location', '$routeParams
     };
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CURRENT USER METHODS
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// GET CURRENT USER =============================================================================
+    var getSessionUser = function(){
+        usersFactory.getSessionUser(function(user){
+            $scope.session_user = user;
+            $scope.userGroups = user.groups
+            // console.log("**** Now useable as $scope variable", user);
+        })
+    };
+    getSessionUser();
+
+// LOG OUT A USER ===============================================================================
+    $scope.logout = function() {
+        usersFactory.logout(function(){
+            $location.url('/login')
+        });
+    };
+
+
+
+////////////////////////////////////////////
+// MISC. FUNCTIONS
+///////////////////////////////////////////
+
+// CANCEL MODAL ON SELECTION ===============================================================================
+    $scope.cancel = function (group_id) {
+        var reg = document.getElementsByClassName("modal-backdrop fade in");
+        reg[0].parentNode.removeChild(reg[0]);
+        $location.url('/profile/group/'+group_id)
+        $scope.regGroup = {}
+        $scope.join = {}
+    };
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GOOGLE MAPS API METHODS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -127,13 +162,18 @@ app.controller('groupDashboardController', ['$scope', '$location', '$routeParams
             } else {
                 $scope.lastMarker = returnDataFromFactory
                 console.log(returnDataFromFactory);
-                initMap(returnDataFromFactory.latitude,returnDataFromFactory.longitude)
+                if (!returnDataFromFactory) {
+                    console.log("no markers yet");
+                    initMapNoMarkers();
+                } else {
+                    initMap(returnDataFromFactory.latitude,returnDataFromFactory.longitude)
+                }
             }
         })
     }
     getLastMarkerCreated()
 
-// INITIALIZE GOOGLE MAPS
+// INIT MAP FOR GROUP WITH MARKERS ===============================================================================
     var initMap = function(latitude,longitude){
         var pos = {
                 lat: latitude,
@@ -141,7 +181,7 @@ app.controller('groupDashboardController', ['$scope', '$location', '$routeParams
             };
         var map = new google.maps.Map(document.getElementById('map'), {
                 center: pos,
-                zoom: 15,
+                zoom: 14,
                 styles: [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2e5d4"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]}],
             });
         map.setCenter(pos);
@@ -170,7 +210,62 @@ app.controller('groupDashboardController', ['$scope', '$location', '$routeParams
             infoWindow.setContent(contentString);
         });
     }
-    initMap();
+
+// INIT MAP FOR BRAND NEW GROUP INSTANCE WITH NO MARKERS ===============================================================================
+    var initMapNoMarkers = function(){
+        // Find HTML5 current geolocation.
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                    center: pos,
+                    zoom: 14,
+                    styles: [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2e5d4"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]}],
+                });
+            var marker = new google.maps.Marker({
+                    map: map,draggable: true,
+                    animation: google.maps.Animation.DROP,
+                    position: pos,
+                    title: "Current Location!",
+                    icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                });
+            // CURRENT LOCATION EVENT LISTENER
+            var infoWindow = new google.maps.InfoWindow();
+            google.maps.event.addListener(marker, 'click', function(){
+                infoWindow.setContent('<h3>Current Location!</h3>');
+                infoWindow.open($scope.map, marker);
+            });
+
+            map.setCenter(pos);
+            marker.addListener('click', toggleBounce);
+            marker.setPosition(pos);
+            $scope.map = map;
+
+            // GOOGLE PLACES API AUTOCOMPLETE
+            // Get the HTML input element for search for the autocomplete search box
+            var input = document.getElementById('pac-input');
+            // Create the autocomplete object.
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            // Event Listener for a Places API search
+            google.maps.event.addListener(autocomplete, 'place_changed', function(){
+                var infoWindow = new google.maps.InfoWindow({map: map});
+                var place = autocomplete.getPlace();
+                var contentString = '<p><b>'+place.name+'</b></p>'+
+                                    '<p>'+place.formatted_address+'</p>';
+                var pos = {
+                        lat: place.geometry.location.lat(),
+                        lng: place.geometry.location.lng()
+                    };
+                fillInForm(place);
+
+                map.setCenter(pos);
+                infoWindow.setPosition(pos);
+                infoWindow.setContent(contentString);
+            });
+        });
+    }
 
 // AUTO FILL IN FORM ==================================================================
     var fillInForm = function(place) {
@@ -218,44 +313,6 @@ app.controller('groupDashboardController', ['$scope', '$location', '$routeParams
                                 'Error: Could not find current location.' :
                                 'Error: Your browser doesn\'t support geolocation.');
     };
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// CURRENT USER METHODS
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// GET CURRENT USER =============================================================================
-    var getSessionUser = function(){
-        usersFactory.getSessionUser(function(user){
-            $scope.session_user = user;
-            $scope.userGroups = user.groups
-            // console.log("**** Now useable as $scope variable", user);
-        })
-    };
-    getSessionUser();
-
-// LOG OUT A USER ===============================================================================
-    $scope.logout = function() {
-        usersFactory.logout(function(){
-            $location.url('/login')
-        });
-    };
-
-
-
-////////////////////////////////////////////
-// MISC. FUNCTIONS
-///////////////////////////////////////////
-
-    $scope.cancel = function (group_id) {
-        var reg = document.getElementsByClassName("modal-backdrop fade in");
-        reg[0].parentNode.removeChild(reg[0]);
-        $location.url('/profile/group/'+group_id)
-        $scope.regGroup = {}
-        $scope.join = {}
-    };
-
 
 }]);
 
