@@ -41,6 +41,16 @@ app.factory('groupsFactory', ['$http', '$routeParams', function($http, $routePar
         })
     };
 
+    factory.changeGroupStatus = function(statusToUpdate, group_id, callback){
+        $http.post('/group/status/'+group_id, statusToUpdate).then(function(returnedDataFromServer){
+            // console.log("Response from server is: ", returnedDataFromServer.data);
+            if(typeof(callback) == 'function'){
+                callback(returnedDataFromServer.data);
+            }
+        })
+    };
+
+
 
 
     return factory;

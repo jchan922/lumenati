@@ -35,10 +35,10 @@
         <div class="row" id="middle_row">
             <div class="col-md-4">
                 <h3>GROUP STATUS</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut</p>
+                <h4><b>{{currentStatus}}</b></h4>
                 <div class="form-group">
                     <form ng-submit="changeGroupStatus()">
-                        <textarea type="text" class="form-control noresize" rows="3" id="comment" ng-model="groupStatus.comment"></textarea>
+                        <textarea type="text" class="form-control noresize" rows="3" id="comment" ng-model="groupStatus.comment" placeholder="Group notes, updates, and other findings..."></textarea>
                         <button class="btn btn-default" type="submit">Update</button>
                     </form>
                 </div>

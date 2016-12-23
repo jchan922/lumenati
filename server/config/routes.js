@@ -25,6 +25,7 @@ module.exports = function(app) {
     // Groups
     app.post('/group/new', groups.create);
     app.post('/group/join', groups.join);
+    app.post('/group/status/:_id', groups.status_change);
     app.get('/group/lastmarker/:_id', groups.lastmarker)
     app.post('/marker/group/new/:_id', markers.addGroupMarker);
     app.get('/marker/group/show/all/:_id', markers.show_group_all);

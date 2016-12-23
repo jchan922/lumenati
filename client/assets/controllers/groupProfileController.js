@@ -63,6 +63,22 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
         })
     };
 
+// CHANGE GROUP STATUS
+    $scope.changeGroupStatus = function () {
+        groupsFactory.changeGroupStatus($scope.groupStatus, $routeParams._id, function(returnDataFromFactory){
+            if(returnDataFromFactory.hasOwnProperty('errors')){
+                $scope.showAllMarkersErrors = returnDataFromFactory.errors;
+            } else {
+                $scope.currentStatus = returnDataFromFactory;
+                $scope.groupStatus = {}
+            }
+        })
+
+
+
+    }
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GOOGLE MAPS API METHODS
@@ -136,5 +152,7 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
         $scope.regGroup = {}
         $scope.join = {}
     };
+
+
 
 }]);

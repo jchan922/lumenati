@@ -94,7 +94,30 @@ module.exports = {
         })
     },
 
-
+// CHANGE GROUP STATUS ===============================================================================
+    status_change: function(req,res){
+        Group.findOne({_id: req.params._id}).exec(function(err,foundGroup){
+            if(!foundGroup){
+                var errors = {errors:{
+                    general:{message:"Invalid group information."}
+                    }
+                }
+                res.json(errors);
+            } else {
+                // console.log(req.body)
+                foundGroup.status = req.body.comment
+                foundGroup.save(function(err, foundGroup){
+                    if (err) {
+                        // console.log("There were validation errors:", err);
+                        res.json(err);
+                    } else {
+                        console.log("***************** Status has been changed!");
+                        res.json(foundGroup.status);
+                    }
+                })
+            }
+        })
+    },
 
 
 }
