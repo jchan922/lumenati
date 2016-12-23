@@ -41,3 +41,35 @@ h1 {
     #card h1 {
         padding-top: 10px;
     }
+
+#register{
+}
+    #reg_first_name {
+        margin-left: 130px;
+        width: 300px;
+    }
+
+    #reg_last_name {
+        margin-left: 131px;
+        width: 300px;
+    }
+
+    #reg_username {
+        margin-left: 135px;
+        width: 300px;
+    }
+
+    #reg_email {
+        margin-left: 174px;
+        width: 300px;
+    }
+
+    #reg_password {
+        margin-left: 138px;
+        width: 300px;
+    }
+
+    #reg_password_conf {
+        margin-left: 25px;
+        width: 300px;
+    }

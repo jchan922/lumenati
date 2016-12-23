@@ -57,17 +57,17 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Register</h4>
+            <h2 class="modal-title">Register</h2>
           </div>
           <div class="modal-body">
               <p ng-repeat="error in regErrors">{{error.message}}</p>
               <form ng-submit="registerUser()">
-                  <label style="display:block;">First Name: <input type="text" ng-model="regUser.first_name"></label>
-                  <label style="display:block;">Last Name: <input type="text" ng-model="regUser.last_name"></label>
-                  <label style="display:block;">Username: <input type="text" ng-model="regUser.username"></label>
-                  <label style="display:block;">Email: <input type="email" ng-model="regUser.email"></label>
-                  <label style="display:block;">Password: <input type="password" ng-model="regUser.password"></label>
-                  <label style="display:block;">Password Confirmation: <input type="password" ng-model="regUser.passwordConf"></label>
+                  <h4 style="display:block;">First Name: <input id="reg_first_name" type="text" ng-model="regUser.first_name"></h4>
+                  <h4 style="display:block;">Last Name: <input id="reg_last_name" type="text" ng-model="regUser.last_name"></h4>
+                  <h4 style="display:block;">Username: <input id="reg_username" type="text" ng-model="regUser.username"></h4>
+                  <h4 style="display:block;">Email: <input id="reg_email" type="email" ng-model="regUser.email"></h4>
+                  <h4 style="display:block;">Password: <input id="reg_password" type="password" ng-model="regUser.password"></h4>
+                  <h4 style="display:block;">Password Confirmation: <input id="reg_password_conf" type="password" ng-model="regUser.passwordConf"></h4>
                   <button class="btn btn-success" type="submit">Register</button>
               </form>
           </div>
