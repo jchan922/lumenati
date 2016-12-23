@@ -62,13 +62,13 @@ module.exports = {
 
 // SHOW ALL MARKERS TO CURRENT USER ===========================================================================
     show_all: function(req,res){
-        // console.log("***************** Got to SERVER markers.js ADD ".yellow);
+        console.log("***************** Got to SERVER markers.js SHOW ALL USER MARKERS ".yellow);
         // console.log("***************** DATA TO CREATE".yellow, req.body);
         User.findOne({_id:req.session.user._id}).populate('markers').exec(function(err, markers){
             if(err){
                 res.json(err);
             } else {
-                // console.log(markers);
+                console.log(markers);
                 res.json(markers);
             }
         });

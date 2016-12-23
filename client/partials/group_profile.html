@@ -26,7 +26,7 @@
         <div class="row" id="top_row">
             <div class="col-md-12">
                 <h1 class="redText">{{currentGroup.name}}</h1>
-                <p>Created On: {{currentGroup.createdAt}}</p>
+                <p>Created On: {{currentGroup.createdAt | date:"MMMM dd, yyyy"}}</p>
                 <button type="button" class="btn btn-success"><a id="add_button" href="#/dashboard/group/{{currentGroup._id}}">Add New Markers</a></button>
                 <button type="button" class="btn btn-danger">Delete Map</button>
             </div>
@@ -37,8 +37,10 @@
                 <h3>GROUP STATUS</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut</p>
                 <div class="form-group">
-                  <textarea class="form-control noresize" rows="3" id="comment"></textarea>
-                  <input type="submit" class="btn btn-default" value="Update">
+                    <form ng-submit="changeGroupStatus()">
+                        <textarea type="text" class="form-control noresize" rows="3" id="comment" ng-model="groupStatus.comment"></textarea>
+                        <button class="btn btn-default" type="submit">Update</button>
+                    </form>
                 </div>
             </div>
             <div class="col-md-4">

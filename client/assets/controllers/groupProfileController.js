@@ -61,7 +61,8 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
                 }
             }
         })
-    }
+    };
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GOOGLE MAPS API METHODS
