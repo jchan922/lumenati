@@ -9,6 +9,20 @@ app.controller('groupDashboardController', ['$scope', '$location', '$routeParams
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GROUP METHODS
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    $scope.groupName = ""
+
+// GET CURRENT GROUP INFO =====================================================================
+    var currentGroupInfo = function() {
+        groupsFactory.currentGroupInfo($routeParams._id, function(returnDataFromFactory){
+            if(returnDataFromFactory.hasOwnProperty('errors')){
+                $scope.regErrors = returnDataFromFactory.errors;
+            } else {
+                $scope.groupName = returnDataFromFactory.name
+                $scope.groupID  = returnDataFromFactory._id
+            }
+        });
+    }
+    currentGroupInfo();
 
 // CREATE GROUP MARKER =====================================================================
     $scope.addGroupMarker = function() {
@@ -241,7 +255,7 @@ app.controller('groupDashboardController', ['$scope', '$location', '$routeParams
             map.setCenter(pos);
             marker.addListener('click', toggleBounce);
             marker.setPosition(pos);
-            $scope.map = map;
+            $scope.map = map
 
             // GOOGLE PLACES API AUTOCOMPLETE
             // Get the HTML input element for search for the autocomplete search box

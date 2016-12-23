@@ -5,6 +5,22 @@ var Marker = mongoose.model("Marker")
 
 module.exports = {
 
+// GET CURRENT GROUP INFO ===============================================================================
+    groupInfo: function(req,res){
+        Group.findOne({_id: req.params._id}).populate('markers').populate('groups').exec(function(err,foundGroup){
+            if(!foundGroup){
+                var errors = {errors:{
+                    general:{message:"Invalid group information."}
+                    }
+                }
+                res.json(errors);
+            } else {
+                res.json(foundGroup)
+            }
+        })
+    },
+
+
 // REGISTER NEW GROUP INTO BATABASE ===============================================================================
     create: function(req,res){
         console.log("***************** Got to SERVER users.js CREATE ".green);
