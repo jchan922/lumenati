@@ -1,64 +1,89 @@
 <div ng-controller="loginController">
-    <div class="container-fluid">
-        <div class="row" id="main_img">
-            <div id="logo_font" class="col-md-8">
-                <h1>Lumenati.</h1>
-                <p id="eye_open"><span class="glyphicon glyphicon-eye-open"></span> Shed some light.</p>
-            </div>
-            <div class="col-md-4" id="modal_buttons" >
-                <div class="card card-block" id="card">
-                    <h2 class="card-title">Welcome!</h2>
-                    <!-- Button trigger modal -->
-                    <p class="redText" ng-repeat="error in loginErrors">{{error.message}}</p>
-                    <form  ng-submit="loginUser(loginUserAttempt)">
-                        <label style="display:block;">Username: <input type="text" ng-model="loginUserAttempt.username"></label>
-                        <label style="display:block;">Password: <input type="password" ng-model="loginUserAttempt.password"></label>
-                        <button class="btn btn-primary btn-md" type="submit">Log-In</button>
-                        <button class="card-link btn btn-md" type="button" data-toggle="modal" data-target="#register"> Register </button>
-                    </form>
-                </div>
-            </div>
+
+    <div id="navbar-container">
+        <div id="navbar-left">
+            <ul>
+                <li>About</li>
+                <li>Features</li>
+            </ul>
+        </div>
+        <div id="navbar-center">
+            <h1>lumenati</h1>
+        </div>
+        <div id="navbar-right">
+            <ul>
+                <li>Login</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div id="home-splash-container">
+        <div id="home-splash-image-container">
+            <img id="home-splash-image" src="./../assets/images/main6.jpeg" alt="">
+            <div id="home-splash-blender"></div>
+        </div>
+        <div id="home-splash-header-container">
+            <p>Manage your trips,<br><span class="raleway-900">together.</span></p>
+            <button id="header-button" type="button" name="button">Get Started!</button>
+        </div>
+    </div>
+
+    <div class="home-description-container">
+        <div class="home-description-category">
+            <h3>Add Bookmarks</h3>
+            <p>Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs.</p>
+        </div>
+        <div class="home-description-category">
+            <h3>Create A Group</h3>
+            <p>Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs.</p>
+        </div>
+        <div class="home-description-category">
+            <h3>Google Maps Integration</h3>
+            <p>Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs.</p>
         </div>
     </div>
 
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-6"></div>
-            <div class="col-md-4"></div>
-        </div>
-    </div>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4">
-                <!-- <i class="medium material-icons">list</i> -->
-                <h3><span class="glyphicon glyphicon-list"></span> Add Bookmarks</h3>
-                <p>Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs. Some don't, become nothing. She starred in one of the ones that became nothing.</p>
-            </div>
-            <div class="col-md-4">
-                <!-- <i class="medium material-icons">supervisor_account</i> -->
-                <h3><span class="glyphicon glyphicon-user"></span> Create A Group</h3>
-                <p>Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs. Some don't, become nothing. She starred in one of the ones that became nothing.</p>
-            </div>
-            <div class="col-md-4">
-                <!-- <i class="medium material-icons">location_on</i> -->
-                <h3><span class="glyphicon glyphicon-map-marker"></span> Google Maps Integration</h3>
-                <p>Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs. Some don't, become nothing. She starred in one of the ones that became nothing.</p>
-            </div>
-        </div>
-    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- Begin Register Modal -->
-    <div class="modal fade" id="register" tabindex="-1" role="dialog">
+    <!-- <div class="modal fade" id="register" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h2 class="modal-title">Register</h2>
           </div>
           <div class="modal-body">
+              <h2 class="modal-title">Log-In</h2>
+              <p class="redText" ng-repeat="error in loginErrors">{{error.message}}</p>
+              <form  ng-submit="loginUser(loginUserAttempt)">
+                  <label style="display:block;">Username: <input type="text" ng-model="loginUserAttempt.username"></label>
+                  <label style="display:block;">Password: <input type="password" ng-model="loginUserAttempt.password"></label>
+                  <button type="submit">Log-In</button>
+              </form>
+              <h2 class="modal-title">Register</h2>
               <p ng-repeat="error in regErrors">{{error.message}}</p>
               <form ng-submit="registerUser()">
                   <h4 style="display:block;">First Name: <input id="reg_first_name" type="text" ng-model="regUser.first_name"></h4>
@@ -67,12 +92,19 @@
                   <h4 style="display:block;">Email: <input id="reg_email" type="email" ng-model="regUser.email"></h4>
                   <h4 style="display:block;">Password: <input id="reg_password" type="password" ng-model="regUser.password"></h4>
                   <h4 style="display:block;">Password Confirmation: <input id="reg_password_conf" type="password" ng-model="regUser.passwordConf"></h4>
-                  <button class="btn btn-success" type="submit">Register</button>
+                  <button type="submit">Register</button>
               </form>
           </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+        </div>
+      </div>
+    </div> -->
+
+
+
+
+
+
+
 
 
 

@@ -19,6 +19,7 @@ app.controller('groupDashboardController', ['$scope', '$location', '$routeParams
             } else {
                 $scope.groupName = returnDataFromFactory.name
                 $scope.groupID  = returnDataFromFactory._id
+                $scope.groupStatus = returnDataFromFactory.status
             }
         });
     }
