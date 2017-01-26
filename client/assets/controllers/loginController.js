@@ -18,10 +18,8 @@ app.controller('loginController', ['$scope', '$location', 'usersFactory', functi
                 $scope.regErrors = returnDataFromFactory.errors;
                 $scope.regUser = {};
             } else {
-                // var reg = document.getElementsByClassName("modal-backdrop fade in");
-                // console.log(reg);
-                // reg[0].parentNode.removeChild(reg[0]);
                 var username = $scope.regUser.username;
+                removeModal()
                 $location.url('/dashboard/'+username);
             }
         });
@@ -38,10 +36,17 @@ app.controller('loginController', ['$scope', '$location', 'usersFactory', functi
                 $scope.loginUserAttempt = {};
             } else {
                 var username = $scope.loginUserAttempt.username;
+                removeModal()
                 $location.url('/dashboard/'+username);
             }
         });
     };
+
+// PROGRAMATICALLY REMOVE MODAL ==========================================================================
+    var removeModal = function() {
+        var modal = angular.element(document.querySelector('.modal-backdrop'));
+        modal.remove();
+    }
 
 // LOG OUT A USER ==========================================================================
     $scope.logout = function() {
