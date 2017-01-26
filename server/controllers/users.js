@@ -10,33 +10,39 @@ module.exports = {
         // console.log("***************** Got to SERVER users.js CREATE ".green);
         // console.log("***************** DATA TO CREATE".green, req.body);
         User.findOne({username:req.body.username}).populate("groups").populate("markers").exec(function(err, user){
-        if(user){
-            var errors = {errors:{
-                general:{message:"Email already exists."}
-                }
-            }
-            res.json(errors);
-        } else if(req.body.password != req.body.passwordConf){
-            var errors = {errors:{
-                general:{message:"Passwords must match."}
-                }}
-            res.json(errors);
-            } else {
-                var registerUser = new User(req.body);
-                registerUser.save(function(err, user){
-                    if (err) {
+            if(user){
+                var errors = {errors:{
+                        general:{message:"Username already exists."}
+                    }}
+                res.json(errors);
+            } else if(req.body.password != req.body.passwordConf){
+                var errors = {errors:{
+                        general:{message:"Passwords must match."}
+                    }}
+                res.json(errors);
+                } else if (req.body.first_name == undefined || req.body.last_name == undefined || req.body.email == undefined || req.body.password == undefined || req.body.passwordConf == undefined){
+                    var errors = {errors:{
+                        general:{message:"All fields must be filled in."}
+                    }}
+                    res.json(errors);
+                } else {
+                    var registerUser = new User(req.body);
+                    registerUser.password = registerUser.generateHash(registerUser.password);
+                    console.log("SALT".green,registerUser.password);
+                    registerUser.save(function(err, user){
+                        if (err) {
                         // console.log("There were validation errors:", err);
                         res.json(err);
-                    } else {
-                        req.session.user = {
-                            _id: user._id,
-                            first_name: user.first_name,
-                            last_name: user.last_name,
-                            username: user.username,
-                            email: user.email,
-                            groups: user.groups,
-                            markers: user.markers
-                        }
+                        } else {
+                            req.session.user = {
+                                _id: user._id,
+                                first_name: user.first_name,
+                                last_name: user.last_name,
+                                username: user.username,
+                                email: user.email,
+                                groups: user.groups,
+                                markers: user.markers
+                            }
                         // console.log("***************** Creating a user session. Going back to the front-end".green);
                         res.sendStatus(200);
                     }
@@ -57,9 +63,10 @@ module.exports = {
             if(!req.body.username||!req.body.password||!user){
                 res.json(errors);
             }else{
-                if(user.password != req.body.password){
-                    res.json(errors);
-                }else{
+                if(!user.validatePassword(req.body.password)){
+                    console.log("VALIDATE".green,user.password);
+                   res.json(errors);
+                } else {
                     req.session.user = {
                         _id: user._id,
                         first_name: user.first_name,

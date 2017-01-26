@@ -3,14 +3,28 @@
     padding: 0;
 }
 
+/*body {
+    background-color: #eaeff2;
+}*/
+
+.redText {
+    color: #F44336;
+    opacity: .87;
+}
+
 .raleway-900 {
     font-family: "Raleway", sans-serif;
     font-weight: 900;
 }
 
+.dosis-800 {
+    font-family: "Dosis", sans-serif;
+    font-weight: 800;
+}
+
 
 #navbar-container {
-    background-color: #283593;
+    background-color: #006064;
     padding: 5px 0;
     display: flex;
     align-items: center;
@@ -21,10 +35,12 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
-    #navbar-container ul {
-        font-family: 'Dosis', sans-serif;
-        font-weight: 700;
-        font-size: .65em;
+    #navbar-left .navbar-list, #navbar-right .navbar-list{
+        margin: 0;
+        padding: 0;
+        font-family: 'Raleway', sans-serif;
+        font-weight: 400;
+        font-size: .5em;
         opacity: 1;
         color: white;
     }
@@ -33,6 +49,7 @@
         display: inline;
         list-style: none;
     }
+
 
     #navbar-left {
         padding: 5px 0;
@@ -54,13 +71,12 @@
         #navbar-center h1 {
             margin: 0;
             padding: 0;
-            text-shadow: 1px 1px #EA80FC;
+            /*text-shadow: 1px 1px #EA80FC;*/
             font-family: 'Dosis', sans-serif;
             font-weight: 700;
             font-size: 1em;
             text-align: center;
             color: white;
-            opacity: .87;
         }
 
     #navbar-right {
@@ -72,6 +88,11 @@
 
         #navbar-right li {
             padding-right: 10px;
+        }
+
+        #navbar-right a {
+            text-decoration: none;
+            color: white;
         }
 
 #home-splash-container {
@@ -132,30 +153,32 @@
         #home-splash-header-container p {
             margin: 0;
             padding: 0;
+            line-height: 1.25;
             font-family: 'Raleway', sans-serif;
             font-size: 1.5em;
             font-weight: 300;
-            color: #1A237E;
+            color: #006064;
             opacity: .87;
         }
 
         #header-button {
             margin: 15px 0;
-            padding: 15px 30px;
+            padding: 10px 30px;
             background-color: white;
             border-radius: 100px 100px 100px 100px;
             -moz-border-radius: 100px 100px 100px 100px;
             -webkit-border-radius: 100px 100px 100px 100px;
-            border: 1.5px solid #536DFE;
+            border: 1.5px solid #006064;
             -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
             -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
             box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
             transition: all 0.3s cubic-bezier(.25,.8,.25,1);
             opacity: .80;
-            color: #536DFE;
-            font-family: 'Lato', sans-serif;
+            color: #006064;
+            font-family: 'Raleway', sans-serif;
             font-weight: 400;
             font-size: .65em;
+            cursor: pointer;
         }
 
         #header-button:hover {
@@ -165,16 +188,50 @@
             opacity: 1;
         }
 
-.home-description-container {
-    width: 90%;
-    margin: 50px 5%;
+#about-container {
     padding: 0;
+    margin: 0;
+    background-color: #006064;
+    font-size: 2.5rem;
+}
+
+    #about-textbox {
+        width: 80%;
+        padding: 50px 0;
+        margin: 0 10%;
+    }
+
+        #about-textbox h2 {
+            padding: 0 0 20px 0;
+            text-align: left;
+            font-family: 'Dosis', sans-serif;
+            font-weight: 700;
+            font-size: 1em;
+            color: white;
+        }
+
+        #about-textbox h3 {
+            padding: 0 0 0 0;
+            line-height: 1.25;
+            text-align: left;
+            font-family: 'Raleway', sans-serif;
+            font-size: .5em;
+            font-weight: 300;
+            color: white;
+        }
+
+.home-description-container {
+    background-color: #eaf3f7;
+    width: 100%;
+    padding: 50px 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
 }
 
     .home-description-category {
-        margin: 10px 0;
+        width: 90%;
+        margin: 10px 5%;
         padding: 0;
         font-size: 2rem;
     }
@@ -183,33 +240,151 @@
         margin: 0;
         padding: 0;
         font-family: 'Dosis', sans-serif;
-        font-weight: 700;
+        font-weight: 900;
         font-size: .75em;
         text-align: left;
-        color: #FFC107;
+        opacity: .87;
+        color: #006064;
     }
 
     .home-description-category p {
         margin: 0;
         padding: 0;
-        font-family: 'Lato', sans-serif;
+        font-family: 'Raleway', sans-serif;
         font-weight: 400;
         font-size: .5em;
         text-align: left;
         /*color: #FFC107;*/
-        opacity: .75;
+        opacity: .54;
     }
 
+.modal-content {
+    width: 90%;
+    margin: 5%;
+}
 
+    .modal-header {
+        margin: 0;
+        padding: 5px 20px;
+        background-color: #0097A7;
+        font-size: 2rem;
+        border: none;
+    }
 
+        #modal-title-header {
+            font-family: 'Dosis', sans-serif;
+            font-weight: 700;
+            font-size: 1em;
+            color: white;
+        }
+
+        button.close {
+            color: white;
+        }
+
+        .close:focus, .close:hover {
+            color: white;
+        }
+
+    .modal-body {
+        margin: 0;
+        padding: 0;
+        background-color: white;
+    }
+
+        .modal-title {
+            margin: 10px 0;
+            font-size: .75em;
+        }
+
+        .form-outer {
+            margin: 0;
+            padding: 10px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .modal-title {
+                font-family: 'Dosis', sans-serif;
+                font-weight: 700;
+                font-size: 1.75em;
+                color: #006064;
+                opacity: .87;
+            }
+
+            .form-inner {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                justify-content: center;
+            }
+
+            #outer-login .form-inner {
+                width: 265px;
+            }
+
+            .well .form-inner {
+                width: 300px;
+            }
+
+                .form-input {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: flex-start;
+                    justify-content: space-between;
+                    font-family: 'Raleway', sans-serif;
+                    font-weight: 400;
+                    opacity: .87;
+                }
+
+                .modal-button {
+                    background-color: #0097A7;
+                    color: white;
+                    cursor: pointer;
+                }
+
+            #button-holder {
+                margin-top: 5px;
+                display: flex;
+                justify-content: flex-end;
+
+            }
+
+                #loginButton {
+                    margin: 0;
+                    margin-left: 5px;
+                    font-family: 'Dosis', sans-serif;
+                    font-weight: 400;
+                    cursor: pointer;
+                    color: white;
+                }
+
+                #collapseButton {
+                    margin: 0;
+                    background-color: #EF5350;
+                    font-family: 'Dosis', sans-serif;
+                    font-weight: 400;
+                    cursor: pointer;
+                    color: white;
+                }
+
+    .modal-footer {
+        margin: 20px 0;
+    }
 
 @media screen and (min-width: 680px){
     #navbar-container {
-        font-size: 3rem;
+        padding: 10px 0;
+        font-size: 2.75rem;
     }
 
-        #navbar-container ul, #navbar-container li {
-            font-size: .65em;
+        #navbar-left .navbar-list, #navbar-right .navbar-list {
+            font-size: .45em;
         }
 
 
@@ -239,14 +414,21 @@
                 padding-right: 10px;
             }
 
+    #home-splash-header-container {
+        top: 22.5%;
+    }
+
+
     #home-splash-header-container p {
         font-size: 2.25em;
     }
 
     #header-button {
         margin: 15px 0;
-        padding: 15px 30px;
+        padding: 10px 30px;
         font-size: .85em;
     }
+
+
 
 }

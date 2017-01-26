@@ -2,7 +2,7 @@
 
     <div id="navbar-container">
         <div id="navbar-left">
-            <ul>
+            <ul class="navbar-list">
                 <li>About</li>
                 <li>Features</li>
             </ul>
@@ -11,8 +11,8 @@
             <h1>lumenati</h1>
         </div>
         <div id="navbar-right">
-            <ul>
-                <li>Login</li>
+            <ul class="navbar-list">
+                <li><a href="#" data-toggle="modal" data-target="#modal">Login</a></li>
             </ul>
         </div>
 
@@ -25,23 +25,35 @@
         </div>
         <div id="home-splash-header-container">
             <p>Manage your trips,<br><span class="raleway-900">together.</span></p>
-            <button id="header-button" type="button" name="button">Get Started!</button>
+            <button id="header-button" type="button" class="btn" name="button" data-toggle="modal" data-target="#modal">Get Started!</button>
         </div>
     </div>
 
+    <div id="about-container">
+        <div id="about-textbox">
+            <h2>Traveling the world can be an amazing, eye-opening experience.</h2>
+            <h3>Normally we create long lists of things we want to see, but we think maps are easier on the eyes. <span class="dosis-800">Lumenati</span> combines the best of both worlds so you can get the most out of your next trip. Whether it's in a group or on your own, we provide you with the tools to ensure that you don't miss a thing.</h3>
+        </div>
+    </div>
+
+
     <div class="home-description-container">
+
         <div class="home-description-category">
-            <h3>Add Bookmarks</h3>
-            <p>Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs.</p>
+            <h3>Create A Profile</h3>
+            <p>Because planning can get messy. Keep tabs on all your trips and groups you normally travel with.</p>
         </div>
+
         <div class="home-description-category">
-            <h3>Create A Group</h3>
-            <p>Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs.</p>
+            <h3>Collaborate Together</h3>
+            <p>Keep everyone updated and in the loop. We provide a central location where everyone in the group can chime in.</p>
         </div>
+
         <div class="home-description-category">
             <h3>Google Maps Integration</h3>
-            <p>Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs.</p>
+            <p>We've implemented the Google Maps and Places API's to track down locations and places accurately for you.</p>
         </div>
+
     </div>
 
 
@@ -69,35 +81,72 @@
 
 
     <!-- Begin Register Modal -->
-    <!-- <div class="modal fade" id="register" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
+<div class="modal fade" id="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          </div>
-          <div class="modal-body">
-              <h2 class="modal-title">Log-In</h2>
-              <p class="redText" ng-repeat="error in loginErrors">{{error.message}}</p>
-              <form  ng-submit="loginUser(loginUserAttempt)">
-                  <label style="display:block;">Username: <input type="text" ng-model="loginUserAttempt.username"></label>
-                  <label style="display:block;">Password: <input type="password" ng-model="loginUserAttempt.password"></label>
-                  <button type="submit">Log-In</button>
-              </form>
-              <h2 class="modal-title">Register</h2>
-              <p ng-repeat="error in regErrors">{{error.message}}</p>
-              <form ng-submit="registerUser()">
-                  <h4 style="display:block;">First Name: <input id="reg_first_name" type="text" ng-model="regUser.first_name"></h4>
-                  <h4 style="display:block;">Last Name: <input id="reg_last_name" type="text" ng-model="regUser.last_name"></h4>
-                  <h4 style="display:block;">Username: <input id="reg_username" type="text" ng-model="regUser.username"></h4>
-                  <h4 style="display:block;">Email: <input id="reg_email" type="email" ng-model="regUser.email"></h4>
-                  <h4 style="display:block;">Password: <input id="reg_password" type="password" ng-model="regUser.password"></h4>
-                  <h4 style="display:block;">Password Confirmation: <input id="reg_password_conf" type="password" ng-model="regUser.passwordConf"></h4>
-                  <button type="submit">Register</button>
-              </form>
-          </div>
+            <div class="modal-header" >
+                <h1 class="modal-title" id="modal-title-header">Welcome!</h1>
+                <button type="button" class="close" id="close-button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-outer" id="outer-login">
+                    <h2 class="modal-title">Log-In</h2>
+                    <p class="redText" ng-repeat="error in loginErrors">{{error.message}}</p>
+                    <form class="form-inner" ng-submit="loginUser(loginUserAttempt)">
+                        <div class="form-input">
+                            <label for="login-username">Username:</label>
+                            <input id="login-username" type="text" ng-model="loginUserAttempt.username">
+                        </div>
+                        <div class="form-input">
+                            <label for="login-password">Password:</label>
+                            <input id="login-password" type="password" ng-model="loginUserAttempt.password">
+                        </div>
+                        <div class="form-input" id="button-holder">
+                            <button class="btn" id="collapseButton" type="button" data-toggle="collapse" data-target="#collapseReg" aria-expanded="false" aria-controls="collapseReg">New Users</button>
+                            <button type="submit" id="loginButton" class="btn modal-button">Log-In</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="collapse" id="collapseReg">
+                    <div class="form-outer well">
+                        <h2 class="modal-title">Register</h2>
+                        <p class="redText" ng-repeat="error in regErrors">{{error.message}}</p>
+                        <form class="form-inner" ng-submit="registerUser()">
+                            <div class="form-input">
+                                <label for="reg-first-name">First Name:</label>
+                                <input id="reg-first-name" type="text" ng-model="regUser.first_name">
+                            </div>
+                            <div class="form-input">
+                                <label for="reg-last-name">Last Name:</label>
+                                <input id="reg-last-name" type="text" ng-model="regUser.last_name">
+                            </div>
+                            <div class="form-input">
+                                <label for="reg-username">Username:</label>
+                                <input id="reg-username" type="text" ng-model="regUser.username">
+                            </div>
+                            <div class="form-input">
+                                <label for="reg-email">Email:</label>
+                                <input id="reg-email" type="email" ng-model="regUser.email">
+                            </div>
+                            <div class="form-input">
+                                <label for="reg-password">Password:</label>
+                                <input id="reg-password" type="password" ng-model="regUser.password">
+                            </div>
+                            <div class="form-input">
+                                <label for="reg-password-conf">Password Confirmation:</label>
+                                <input id="reg-password-conf" type="password" ng-model="regUser.passwordConf">
+                            </div>
+                            <button type="submit" class="btn modal-button">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
         </div>
-      </div>
-    </div> -->
+    </div>
+</div>
 
 
 

@@ -4,7 +4,7 @@
 //  *                                   *   //
 //  *************************************   //
 
-var app = angular.module('app', ['ngRoute', 'ui.bootstrap']);
+var app = angular.module('app', ['ngRoute']);
 
 app.factory('loginInterceptor', ['$q','$location',function($q, $location){
     return{

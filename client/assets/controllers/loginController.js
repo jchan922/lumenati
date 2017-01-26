@@ -18,9 +18,9 @@ app.controller('loginController', ['$scope', '$location', 'usersFactory', functi
                 $scope.regErrors = returnDataFromFactory.errors;
                 $scope.regUser = {};
             } else {
-                var reg = document.getElementsByClassName("modal-backdrop fade in");
-                console.log(reg);
-                reg[0].parentNode.removeChild(reg[0]);
+                // var reg = document.getElementsByClassName("modal-backdrop fade in");
+                // console.log(reg);
+                // reg[0].parentNode.removeChild(reg[0]);
                 var username = $scope.regUser.username;
                 $location.url('/dashboard/'+username);
             }

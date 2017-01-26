@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
-    "angular-ui-bootstrap": "^2.2.0",
+    "bcrypt": "^1.0.2",
     "body-parser": "latest",
     "colors": "latest",
     "ejs": "latest",
