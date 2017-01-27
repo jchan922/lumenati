@@ -1,0 +1,137 @@
+body {
+    background-color: #e6edf2;
+    color: #3a3a3a;
+}
+
+.redText {
+    color: #ed4e6b;
+}
+.navbar {
+    padding: 10px 0px;
+    margin: 0px;
+    min-height: 0px;
+}
+    #nav_ul{
+        list-style: none;
+        display: inline;
+        padding: 0px;
+        margin: 0px;
+
+    }
+
+        #nav_ul li h4 {
+            display: inline;
+        }
+
+        #nav_ul li{
+            display: inline;
+        }
+
+h3 {
+    text-align: left;
+    display: block;
+}
+
+h1 {
+    text-align: center;
+}
+
+.noresize {
+    resize: none;
+    margin-bottom: 5px;
+}
+
+    #map {
+        height: 1000px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+#message {
+    height: 100px;
+    max-width: 100%;
+}
+
+
+/*search box*/
+.controls {
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 0px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+#sort_category {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+    #sort_category li{
+        display: block;
+    }
+
+    #sort_category li h4{
+        display: inline;
+    }
+
+
+#modal_row input {
+    display: block;
+}
+
+    #current_groups {
+        display: inline-block;
+    }
+
+    #new_group {
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    #current_groups ul {
+        list-style: none;
+        margin-left: 0px;
+        padding-left: 0px;
+    }
+
+/*#pac-input:focus {
+  border-color: #4d90fe;
+}*/
+
+/*.pac-container {
+  font-family: Roboto;
+}
+
+#type-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+  font-size: 13px;
+  font-weight: 300;
+}
+#target {
+  width: 345px;
+}*/
