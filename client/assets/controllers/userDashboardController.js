@@ -60,9 +60,6 @@ app.controller('userDashboardController', ['$scope', '$location', '$routeParams'
             if(returnDataFromFactory.hasOwnProperty('errors')){
                 $scope.regErrors = returnDataFromFactory.errors;
             } else {
-                var reg = document.getElementsByClassName("modal-backdrop fade in");
-
-                reg[0].parentNode.removeChild(reg[0]);
                 var groupID = returnDataFromFactory._id;
                 $scope.regGroup = {}
                 $scope.join = {}
@@ -78,9 +75,6 @@ app.controller('userDashboardController', ['$scope', '$location', '$routeParams'
             if(returnDataFromFactory.hasOwnProperty('errors')){
                 $scope.regErrors = returnDataFromFactory.errors;
             } else {
-                var reg = document.getElementsByClassName("modal-backdrop fade in");
-
-                reg[0].parentNode.removeChild(reg[0]);
                 var groupID = returnDataFromFactory._id;
                 $scope.regGroup = {}
                 $scope.join = {}
@@ -253,7 +247,11 @@ app.controller('userDashboardController', ['$scope', '$location', '$routeParams'
     var getSessionUser = function(){
         usersFactory.getSessionUser(function(user){
             $scope.session_user = user;
-            $scope.userGroups = user.groups
+            if (user.groups.length == 0) {
+                $scope.userGroups = [{name: "No Groups Yet!"}];
+            } else {
+                $scope.userGroups = user.groups;
+            }
             // console.log("**** Now useable as $scope variable", user);
         })
     };
