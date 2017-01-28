@@ -4,7 +4,7 @@
 //  *                                       *  //
 //  *****************************************  //
 
-app.controller('userDashboardController', ['$scope', '$location', '$routeParams', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, routeParams, usersFactory, markersFactory, groupsFactory) {
+app.controller('dashboardController', ['$scope', '$location', '$routeParams', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, routeParams, usersFactory, markersFactory, groupsFactory) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MARKER METHODS
@@ -63,7 +63,7 @@ app.controller('userDashboardController', ['$scope', '$location', '$routeParams'
                 var groupID = returnDataFromFactory._id;
                 $scope.regGroup = {}
                 $scope.join = {}
-                $location.url('/dashboard/group/'+groupID);
+                $location.url('/profile/group/'+groupID);
             }
         });
     };
@@ -78,7 +78,7 @@ app.controller('userDashboardController', ['$scope', '$location', '$routeParams'
                 var groupID = returnDataFromFactory._id;
                 $scope.regGroup = {}
                 $scope.join = {}
-                $location.url('/dashboard/group/'+groupID);
+                $location.url('/profile/group/'+groupID);
             }
         });
     };
@@ -145,7 +145,7 @@ app.controller('userDashboardController', ['$scope', '$location', '$routeParams'
             });
         });
     }
-    initMap();
+    // initMap();
 
 // SHOW ALL CURRENT USERS MARKERS ==================================================================
     var showAllMarkers = function() {
@@ -271,8 +271,6 @@ app.controller('userDashboardController', ['$scope', '$location', '$routeParams'
 ///////////////////////////////////////////
 
     $scope.cancel = function (group_id) {
-        var reg = document.getElementsByClassName("modal-backdrop fade in");
-        reg[0].parentNode.removeChild(reg[0]);
         $location.url('/profile/group/'+group_id)
         $scope.regGroup = {}
         $scope.join = {}

@@ -1,5 +1,41 @@
 app.controller('groupProfileController', ['$scope', '$location', '$routeParams', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, $routeParams, usersFactory, markersFactory, groupsFactory) {
 
+// GET CURRENT GROUP INFO =====================================================================
+    var currentGroupInfo = function() {
+        groupsFactory.currentGroupInfo($routeParams._id, function(returnDataFromFactory){
+            if(returnDataFromFactory.hasOwnProperty('errors')){
+                $scope.regErrors = returnDataFromFactory.errors;
+            } else {
+                $scope.groupName = returnDataFromFactory.name
+                $scope.groupID  = returnDataFromFactory._id
+                $scope.groupStatus = returnDataFromFactory.status
+            }
+        });
+    }
+    currentGroupInfo();
+
+// CREATE GROUP MARKER =====================================================================
+    $scope.addGroupMarker = function() {
+        $scope.newGroupMarker = {
+            title: title.value,
+            address: address.value,
+            category: category.value,
+            description: description.value,
+            url: url.value,
+            latitude: latitude.value,
+            longitude: longitude.value
+        }
+        markersFactory.addGroupMarker($routeParams._id, $scope.newGroupMarker, function(returnDataFromFactory){
+            if(returnDataFromFactory.hasOwnProperty('errors')){
+                $scope.showAllMarkersErrors = returnDataFromFactory.errors;
+            } else {
+                showAllGroupMarkers();
+                $scope.newGroupMarker = {};
+            }
+        })
+    }
+
+
 // GET LAST MARKER CREATED ==========================================================================
     var getLastMarkerCreated = function() {
         groupsFactory.getLastMarkerCreated($routeParams._id, function(returnDataFromFactory){
@@ -8,11 +44,11 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
             } else {
                 if(!returnDataFromFactory){
                     $scope.noMarkers = "NO MARKERS YET!!"
-                    initMap(34.1375902,-118.3551984);
+                    groupInItMap(34.1375902,-118.3551984);
                 } else {
                     $scope.lastMarker = returnDataFromFactory
                     console.log(returnDataFromFactory);
-                    initMap(returnDataFromFactory.latitude,returnDataFromFactory.longitude);
+                    groupInItMap(returnDataFromFactory.latitude,returnDataFromFactory.longitude);
                 }
             }
         })
@@ -73,9 +109,6 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
                 $scope.groupStatus = {}
             }
         })
-
-
-
     }
 
 
@@ -85,7 +118,8 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // INITIALIZE GOOGLE MAPS
-    var initMap = function(latitude,longitude){
+    var groupInItMap = function(latitude,longitude){
+        console.log("we out here");
         // Find HTML5 geolocation.
             var pos = {
                     lat: latitude,
@@ -94,12 +128,73 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
             var map = new google.maps.Map(document.getElementById('map'), {
                     center: pos,
                     zoom: 15,
+                    zoomControl: true,
+                    scaleControl: true,
+                    fullscreenControl: true,
+                    mapTypeControl: false,
+                    streetViewControl: false,
+                    rotateControl: false,
                     styles: [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2e5d4"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]}],
                 });
             map.setCenter(pos);
             $scope.map = map;
             showAllGroupMarkers();
+
+            // GOOGLE PLACES API AUTOCOMPLETE
+            // Get the HTML input element for search for the autocomplete search box
+            var input = document.getElementById('group-profile-pac-input');
+            // Create the autocomplete object.
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            // Event Listener for a Places API search
+            google.maps.event.addListener(autocomplete, 'place_changed', function(){
+                var infoWindow = new google.maps.InfoWindow({map: map});
+                var place = autocomplete.getPlace();
+                var contentString = '<p><b>'+place.name+'</b></p>'+
+                                    '<p>'+place.formatted_address+'</p>';
+                var pos = {
+                        lat: place.geometry.location.lat(),
+                        lng: place.geometry.location.lng()
+                    };
+                fillInForm(place);
+
+                map.setCenter(pos);
+                infoWindow.setPosition(pos);
+                infoWindow.setContent(contentString);
+            });
     }
+
+// AUTO FILL IN FORM ==================================================================
+    var fillInForm = function(place) {
+    // Get the place details from the autocomplete object.
+        var lat = place.geometry.location.lat();
+        var lng = place.geometry.location.lng();
+        var markerForm = {
+            title: place.name,
+            address: place.formatted_address,
+            latitude: lat,
+            longitude: lng
+        };
+        for (key in markerForm) {
+            var element = document.getElementById(key)
+            // element.value = '';
+            // console.log("Initial key value", element.value);
+
+            if(key == 'latitude' || key == 'longitude'){
+                document.getElementById(key).disabled = true;
+            } else {
+                document.getElementById(key).disabled = false;
+                }
+            var val = markerForm[key];
+            var elementAttr = element.getAttribute("value");
+            // console.log("Get value attribute", elementAttr);
+            element.value = val;
+            elementAttr = val;
+            // console.log("Value changed to: ", elementAttr);
+            element.setAttribute("value", val)
+        }
+        $scope.markerForm = markerForm;
+    };
+
 
     var toggleBounce = function() {
         if (marker.getAnimation() !== null) {
@@ -115,7 +210,6 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
                                 'Error: Could not find current location.' :
                                 'Error: Your browser doesn\'t support geolocation.');
     };
-
 
 
 

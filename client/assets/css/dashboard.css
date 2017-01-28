@@ -1,27 +1,30 @@
 #dashboard-container {
-    width: 90%;
-    padding: 25px 0;
-    margin: 25px 5% 25px 5%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
     text-align: center;
 }
 
-    .test-container {
-        /*border: 1px solid blue;*/
-        width: 100%;
-        margin: 0;
+    .dashboard-content-container {
+        width: 80%;
+        margin: 0 10%;
         display: flex;
+        position: absolute;
         flex-direction: column;
         justify-content: space-around;
     }
 
-        .test-inner {
+        .dashboard-content-inner:first-child {
+            flex: 1;
         }
 
-            .test {
-                background-color: #018589;
-                margin: 10px;
-                padding: 15px;
-                flex: 1 0 50%;
+        .dashboard-content-inner:last-child {
+            flex: 1.25;
+        }
+
+            .dashboard-content {
+                margin: 15px;
+                padding: 0;
                 font-family: 'Lato', sans-serif;
                 font-weight: 700;
                 font-size: 2rem;
@@ -32,6 +35,10 @@
             }
 
             #dashboard-welcome {
+                width: 100%;
+                margin: 0;
+                padding: 15px;
+                background-color: #00838F;
                 font-family: 'Dosis', sans-serif;
                 font-weight: 800;
                 font-size: 1.5em;
@@ -39,7 +46,11 @@
                 color: white;
             }
 
-            .test h2 {
+            .dashboard-content h2 {
+                width: 100%;
+                margin: 0;
+                padding: 15px;
+                background-color: #00ACC1;
                 font-family: 'Dosis', sans-serif;
                 font-weight: 800;
                 font-size: 1em;
@@ -47,7 +58,7 @@
                 color: white;
             }
 
-            .test p {
+            .dashboard-content p {
                 font-family: 'Lato', sans-serif;
                 font-weight: 500;
                 font-size: .5em;
@@ -65,12 +76,13 @@
                     padding: 0;
                     margin: 0;
                     text-decoration: none;
+
                 }
 
                 #current-groups-list a {
                     padding: 0;
                     margin: 0;
-                    color: white;
+                    color: black;
                     font-size: .5em;
                 }
 
@@ -87,7 +99,7 @@
                 .dashboard-form-input label {
                     text-align: left;
                     margin-right: 15px;
-                    color: white;
+                    color: black;
                 }
 
                 .dashboard-form-input input {
@@ -97,14 +109,22 @@
 
 @media screen and (min-width:768px) {
 
-    .test-container {
-        width: 90%;
-        margin: 0 5%;
+    .dashboard-content-container {
+        width: 80%;
+        margin: 30px 10%;
         flex-direction: row;
     }
 
-        .test-inner {
+        .dashboard-content-inner {
             width: 50%;
         }
+
+    .dashboard-content-inner:first-child {
+        flex: 1;
+    }
+
+    .dashboard-content-inner:last-child {
+        flex: 1.5;
+    }
 
 }

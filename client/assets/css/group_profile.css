@@ -1,0 +1,119 @@
+#group-profile-top-container {
+    border: 1px soild red;
+    height: 95vh;
+    font-size: 2rem;
+}
+
+    #group-profile-sidebar{
+        background-color: white;
+        min-width: 40%;
+        margin: .5% 58% 5px .5%;;
+        padding: 3px;
+        position: absolute;
+        z-index: 1;
+        border: 0;
+        text-overflow: ellipsis;
+        -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+        #map-group-header{
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+            #map-group-header h1 {
+                padding: 0;
+                margin: 0;
+                font-family: 'Dosis', sans-serif;
+                font-weight: 800;
+                font-size: 1em;
+                text-align: center;
+                color: black;
+                opacity: .75;
+            }
+
+            #map-group-header p {
+                padding: 0;
+                margin: 0;
+                font-family: 'Lato', sans-serif;
+                font-weight: 500;
+                font-size: .35em;
+                text-align: center;
+                color: black;
+                opacity: .54;
+            }
+
+
+    #map-group-search {
+        width: 90%;
+        margin: 5px 5% 0 5%;
+        padding: 5px 0 5px 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+        #group-profile-pac-input {
+            width: 100%;
+            padding: 0 0 0 5px;
+            margin: 0 0 5px 0;
+            -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+            -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+            box-sizing: border-box;         /* Opera/IE 8+ */
+            font-family: 'Lato', sans-serif;
+            font-weight: 500;
+            font-size: .5em;
+            text-align: left;
+            color: black;
+            opacity: .54;
+        }
+
+        #group-add-modalopen {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            font-family: 'Lato', sans-serif;
+            font-weight: 500;
+            font-size: .5em;
+            text-align: center;
+            background-color: #FF1744;
+            color: white;
+            opacity: .54;
+        }
+
+
+    #map {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        opacity: .9;
+    }
+
+
+@media screen and (min-width: 768px) {
+    #group-profile-top-container {
+        font-size: 2.5rem;
+        height: 93.5vh;
+    }
+
+    #group-profile-sidebar {
+        min-width: 0;
+        width: 30%;
+        margin: .5% 68% 5px .5%;
+        padding: 10px 3px;
+    }
+
+        #map-group-header{
+            /*width: 350px;*/
+            /*padding: 3px 0 0 0;*/
+        }
+
+    #group-profile-pac-input {
+        padding: 0 0 0 10px;
+        margin: 0 0 5px 0;
+        font-size: .5em;
+    }
+
+}

@@ -1,10 +1,9 @@
 <link rel="stylesheet" href="assets/css/dashboard.css">
-<div ng-controller="userDashboardController">
-
+<div ng-controller="dashboardController">
     <nav id="lumenati-navbar-container">
         <div id="lumenati-navbar">
             <ul class="lumenati-nav-ul">
-                <li id="lumenati-logo">lumenati</li>
+                <li><a id="lumenati-logo" href="#/dashboard/{{session_user.username}}">lumenati</a></li>
             </ul>
             <ul class="lumenati-nav-ul">
                 <!-- <li><a href="#/dashboard/{{session_user.username}}" ng-click="">My Map</a></li> -->
@@ -16,21 +15,20 @@
     </nav>
 
     <div id="dashboard-container">
-        <div class="test-container">
-            <div class="test-inner">
-                <div class="test">
+        <div class="dashboard-content-container">
+            <div class="dashboard-content-inner">
+                <div class="dashboard-content">
                     <h1 id="dashboard-welcome">Hello, {{session_user.first_name}}!</h1>
-
                 </div>
-                <div class="test">
+                <div class="dashboard-content">
                     <h2>Current Groups</h2>
                     <ul id="current-groups-list"ng-repeat="group in userGroups">
                         <li><a href="#/profile/group/{{group._id}}" ng-click="cancel(group._id)">{{group.name}}</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="test-inner">
-                <div class="test">
+            <div class="dashboard-content-inner">
+                <div class="dashboard-content">
                     <h2>Create New Group</h2>
                     <p ng-repeat="error in regErrors">{{error.message}}</p>
                     <form id="create-group-form" ng-submit="registerGroup()">
@@ -43,13 +41,13 @@
                             <input id="create-group-password" type="password" ng-model="regGroup.password">
                         </div>
                         <div class="dashboard-form-input">
-                            <label for="create-group-password-conf">Password Confirmation:</label>
+                            <label for="create-group-password-conf">Confirm Password:</label>
                             <input id="create-group-password-conf" type="password" ng-model="regGroup.passwordConf">
                         </div>
                         <button class="btn btn-success" type="submit">Create</button>
                     </form>
                 </div>
-                <div class="test">
+                <div class="dashboard-content">
                     <h2>Join A Group</h2>
                     <p ng-repeat="error in regErrors">{{error.message}}</p>
                     <form id="join-group-form"  ng-submit="joinGroup()">

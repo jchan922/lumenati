@@ -6,8 +6,7 @@ app.controller('userProfileController', ['$scope', '$location', 'usersFactory', 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // INITIALIZE GOOGLE MAPS
-    var initMap = function(){
-        console.log("WE OUT HERE");
+    var userProfileInItMap = function(){
         // Find HTML5 geolocation.
         navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
@@ -68,7 +67,7 @@ app.controller('userProfileController', ['$scope', '$location', 'usersFactory', 
             });
         });
     }
-    initMap();
+    userProfileInItMap();
 
 // SHOW ALL CURRENT USERS MARKERS ==================================================================
     var showAllMarkers = function() {
