@@ -83,7 +83,7 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
                         });
                             google.maps.event.addListener(marker, 'click', function(){
                                 if (marker.url){
-                                    infoWindow.setContent('<p><b>' + marker.title + '</b></p><p>' + marker.address + '</p><p><u>Category</u>: ' +  marker.category + '</p><p><u>Notes</u>: ' + marker.description + '</p><a href='+marker.url+'>Website</a>');
+                                    infoWindow.setContent('<p><b>' + marker.title + '</b></p><p>' + marker.address + '</p><p><u>Category</u>: ' +  marker.category + '</p><p><u>Notes</u>: ' + marker.description + '</p><a href='+marker.url+' target="_blank">Website</a>');
                                 } else {
                                     infoWindow.setContent('<p><b>' + marker.title + '</b></p><p>' + marker.address + '</p><p><u>Category</u>: ' +  marker.category + '</p><p><u>Notes</u>: ' + marker.description + '</p>');
                                 }
@@ -119,7 +119,6 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
 
 // INITIALIZE GOOGLE MAPS
     var groupInItMap = function(latitude,longitude){
-        console.log("we out here");
         // Find HTML5 geolocation.
             var pos = {
                     lat: latitude,
@@ -175,13 +174,16 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
             longitude: lng
         };
         for (key in markerForm) {
+            console.log(key, markerForm[key]);
             var element = document.getElementById(key)
             // element.value = '';
             // console.log("Initial key value", element.value);
-
+            //
             if(key == 'latitude' || key == 'longitude'){
+                console.log("true");
                 document.getElementById(key).disabled = true;
             } else {
+                console.log("false");
                 document.getElementById(key).disabled = false;
                 }
             var val = markerForm[key];
@@ -211,6 +213,12 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
                                 'Error: Your browser doesn\'t support geolocation.');
     };
 
+
+// PROGRAMATICALLY REMOVE MODAL ==========================================================================
+    var removeGroupModal = function() {
+        var modal = angular.element(document.querySelector('.modal-backdrop fade show'));
+        modal.remove();
+    }
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////

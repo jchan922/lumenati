@@ -19,7 +19,7 @@ app.controller('loginController', ['$scope', '$location', 'usersFactory', functi
                 $scope.regUser = {};
             } else {
                 var username = $scope.regUser.username;
-                removeModal()
+                removeModal();
                 $location.url('/dashboard/'+username);
             }
         });
@@ -36,7 +36,7 @@ app.controller('loginController', ['$scope', '$location', 'usersFactory', functi
                 $scope.loginUserAttempt = {};
             } else {
                 var username = $scope.loginUserAttempt.username;
-                removeModal()
+                removeModal();
                 $location.url('/dashboard/'+username);
             }
         });

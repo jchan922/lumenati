@@ -62,57 +62,36 @@
     <!-- Begin Create Group Modal -->
     <div class="modal fade" id="addBookmark" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div id="group-modal-content" class="modal-content">
+                <div id="group-modal-header" class="modal-header">
                     <h2 class="modal-title">Add Bookmark</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row" id="modal_row">
-                            <form ng-submit="addGroupMarker()">
-                                <div class="form-group">
-                                    <p>Add a new marker: </p>
-                                    <p class="redText">{{newMarkerErrors.emptyForm}}</p>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="title" placeholder="Title" ng-model="newGroupMarker.title" value="">
-                                        <p class="redText">{{newMarkerErrors.title}}</p>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="address" placeholder="Address" ng-model="newGroupMarker.address" value="">
-                                        <p class="redText">{{newMarkerErrors.address}}</p>
-                                    </div>
-                                    <div class="form-group">
-                                        <select class="form-control" id="category" placeholder="Category" ng-model="newGroupMarker.category" value="">
-                                            <option value="" disabled selected>Select A Category...(optional)</option>
-                                            <option value="Food">Food</option>
-                                            <option value="Coffee">Coffee</option>
-                                            <option value="Bar/Nightlife">Bar/Nightlife</option>
-                                            <option value="Point of Interest">Point of Interest</option>
-                                            <option value="Venue">Venue</option>
-                                            <option value="Shopping">Shopping</option>
-                                            <option value="Airport">Airport</option>
-                                            <option value="Hotel">Hotel</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea type="textarea" class="form-control noresize" id="description" placeholder="Description" ng-model="newGroupMarker.description" value=""></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="url" placeholder="URL (optional)" ng-model="newGroupMarker.url" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="latitude" placeholder="Latitude" disabled="true" ng-model="newGroupMarker.latitude" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="longitude" placeholder="Longitude" disabled="true" ng-model="newGroupMarker.longitude" value="">
-                                    </div>
-                                    <p class="redText">{{newMarkerErrors.coordinates}}</p>
-                                    <input type="submit" class="btn btn-default" value="Add Marker">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                <div id="group-modal-body" class="modal-body">
+                    <p class="redText">{{newMarkerErrors.emptyForm}}</p>
+                    <p class="redText">{{newMarkerErrors.title}}</p>
+                    <p class="redText">{{newMarkerErrors.address}}</p>
+                    <p class="redText">{{newMarkerErrors.coordinates}}</p>
+                    <form id="group-modal-form" ng-submit="addGroupMarker()">
+                        <input type="text" class="form-control" id="title" placeholder="Title" ng-model="newGroupMarker.title" value="">
+                        <input type="text" class="form-control" id="address" placeholder="Address" ng-model="newGroupMarker.address" value="">
+                        <select class="form-control" id="category" placeholder="Category" ng-model="newGroupMarker.category" value="">
+                            <option value="" disabled selected>Select A Category...(optional)</option>
+                            <option value="Food">Food</option>
+                            <option value="Coffee">Coffee</option>
+                            <option value="Bar/Nightlife">Bar/Nightlife</option>
+                            <option value="Point of Interest">Point of Interest</option>
+                            <option value="Venue">Venue</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Airport">Airport</option>
+                            <option value="Hotel">Hotel</option>
+                        </select>
+                        <textarea type="textarea" class="form-control noresize" id="description" placeholder="Description" ng-model="newGroupMarker.description" value=""></textarea>
+                        <input type="text" class="form-control" id="url" placeholder="URL (optional)" ng-model="newGroupMarker.url" value="">
+                        <input type="text" class="form-control" id="latitude" placeholder="Latitude" disabled="true" ng-model="newGroupMarker.latitude" value="">
+                        <input type="text" class="form-control" id="longitude" placeholder="Longitude" disabled="true" ng-model="newGroupMarker.longitude" value="">
+                        <input type="submit" class="btn btn-default" value="Add Marker">
+                    </form>
                 </div>
             </div>
         </div>

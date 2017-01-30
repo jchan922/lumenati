@@ -92,6 +92,45 @@
     }
 
 
+    /* GROUP PROFILE MODAL */
+
+    #group-modal-content {
+        width: 80%;
+        margin: 15px 10%;
+    }
+
+        #group-modal-header {
+            padding: 3px 5%;
+            font-size: 1.5rem;
+        }
+
+            #group-modal-header h2 {
+                padding: 3px 5%;
+                font-size: 1em;
+                color: white;
+            }
+
+        #group-modal-body {
+            width: 80%;
+            margin: 10px 10%;
+            font-size: 1rem;
+        }
+
+            #group-modal-form {
+                width: 100%;
+            }
+
+                #group-modal-form input, #group-modal-form select, #group-modal-form textarea{
+                    margin: 0 0 5px 0;
+                    font-size: 1em;
+                }
+
+                #group-modal-form textarea {
+                    height: 100px;
+                }
+
+
+
 @media screen and (min-width: 768px) {
     #group-profile-top-container {
         font-size: 2.5rem;
