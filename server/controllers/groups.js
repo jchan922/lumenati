@@ -23,15 +23,12 @@ module.exports = {
 
 // REGISTER NEW GROUP INTO BATABASE ===============================================================================
     create: function(req,res){
-        console.log("***************** Got to SERVER users.js CREATE ".green);
-        console.log("***************** DATA TO CREATE".green, req.body);
         var newGroup = new Group(req.body)
         var currentUser = req.session.user._id
         newGroup._creator = currentUser
         newGroup.members.push(currentUser)
         newGroup.save(function(err, group){
             if (err) {
-                console.log("There were validation errors:", err);
                 res.json(err);
             } else {
                 User.findOne({_id:req.session.user._id}).exec(function(err,user){
@@ -44,9 +41,6 @@ module.exports = {
                                 res.json(err);
                             } else {
                                 res.json(newGroup)
-                                console.log("***************** Group created and added to User".green);
-                                console.log("Group created:".green, newGroup);
-                                console.log("Going back to the front-end. *****************".green);
                             }
                         })
                     }
@@ -57,8 +51,6 @@ module.exports = {
 
 // JOIN EXISTING GROUP INTO BATABASE ===============================================================================
     join: function(req,res){
-        console.log("***************** Got to SERVER users.js CREATE ".green);
-        console.log("***************** DATA TO CREATE".green, req.body);
         Group.findOne({name: req.body.name}).exec(function(err,foundGroup){
             if(!foundGroup || req.body.password != foundGroup.password){
                 var errors = {errors:{
@@ -70,7 +62,6 @@ module.exports = {
                 foundGroup.members.push(req.session.user._id)
                 foundGroup.save(function(err, foundGroup){
                     if (err) {
-                        console.log("There were validation errors:", err);
                         res.json(err);
                     } else {
                         User.findOne({_id:req.session.user._id}).exec(function(err,user){
@@ -83,7 +74,6 @@ module.exports = {
                                         res.json(err);
                                     } else {
                                         res.json(foundGroup)
-                                        console.log("***************** Group joined and added to User".green);
                                     }
                                 })
                             }
@@ -120,14 +110,11 @@ module.exports = {
                 }
                 res.json(errors);
             } else {
-                // console.log(req.body)
                 foundGroup.status = req.body.comment
                 foundGroup.save(function(err, foundGroup){
                     if (err) {
-                        // console.log("There were validation errors:", err);
                         res.json(err);
                     } else {
-                        console.log("***************** Status has been changed!");
                         res.json(foundGroup.status);
                     }
                 })

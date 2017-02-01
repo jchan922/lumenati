@@ -26,9 +26,6 @@ app.config(function ($routeProvider, $httpProvider) {
         .when('/dashboard/:username',{
             templateUrl: 'partials/dashboard.html'
         })
-        .when('/profile/:_id',{
-            templateUrl: 'partials/user_profile.html'
-        })
         .when('/profile/group/:_id',{
             templateUrl: 'partials/group_profile.html'
         })

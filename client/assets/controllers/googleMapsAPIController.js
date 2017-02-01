@@ -1,12 +1,10 @@
-app.controller('userProfileController', ['$scope', '$location', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, usersFactory, markersFactory, groupsFactory) {
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GOOGLE MAPS API METHODS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // INITIALIZE GOOGLE MAPS
-    var userProfileInItMap = function(){
+    var initMap = function(){
         // Find HTML5 geolocation.
         navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
@@ -16,12 +14,6 @@ app.controller('userProfileController', ['$scope', '$location', 'usersFactory', 
             var map = new google.maps.Map(document.getElementById('map'), {
                     center: pos,
                     zoom: 16,
-                    zoomControl: true,
-                    scaleControl: true,
-                    fullscreenControl: true,
-                    mapTypeControl: false,
-                    streetViewControl: false,
-                    rotateControl: false,
                     styles: [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2e5d4"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]}],
                 });
             var marker = new google.maps.Marker({
@@ -42,7 +34,7 @@ app.controller('userProfileController', ['$scope', '$location', 'usersFactory', 
             marker.addListener('click', toggleBounce);
             marker.setPosition(pos);
             $scope.map = map;
-            // showAllMarkers();
+            showAllMarkers();
 
             // GOOGLE PLACES API AUTOCOMPLETE
             // Get the HTML input element for search for the autocomplete search box
@@ -67,7 +59,6 @@ app.controller('userProfileController', ['$scope', '$location', 'usersFactory', 
             });
         });
     }
-    userProfileInItMap();
 
 // SHOW ALL CURRENT USERS MARKERS ==================================================================
     var showAllMarkers = function() {
@@ -110,6 +101,34 @@ app.controller('userProfileController', ['$scope', '$location', 'usersFactory', 
         })
     }
 
+// AUTO FILL IN FORM ==================================================================
+    var fillInForm = function(place) {
+    // Get the place details from the autocomplete object.
+        var lat = place.geometry.location.lat();
+        var lng = place.geometry.location.lng();
+        var markerForm = {
+            title: place.name,
+            address: place.formatted_address,
+            latitude: lat,
+            longitude: lng
+        };
+        for (key in markerForm) {
+            var element = document.getElementById(key)
+            if(key == 'latitude' || key == 'longitude'){
+                document.getElementById(key).disabled = true;
+            } else {
+                document.getElementById(key).disabled = false;
+                }
+            var val = markerForm[key];
+            var elementAttr = element.getAttribute("value");
+            element.value = val;
+            elementAttr = val;
+            element.setAttribute("value", val)
+        }
+        $scope.markerForm = markerForm;
+    };
+
+
     var toggleBounce = function() {
         if (marker.getAnimation() !== null) {
             marker.setAnimation(null);
@@ -118,27 +137,78 @@ app.controller('userProfileController', ['$scope', '$location', 'usersFactory', 
         }
     };
 
+    var handleLocationError = function(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                                'Error: Could not find current location.' :
+                                'Error: Your browser doesn\'t support geolocation.');
+    };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// CURRENT USER METHODS
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// GET CURRENT USER =============================================================================
-    var getSessionUser = function(){
-        usersFactory.getSessionUser(function(user){
-            $scope.session_user = user;
-            $scope.userGroups = user.groups
-            // console.log("**** Now useable as $scope variable", user);
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MARKER METHODS
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// CREATE NEW MARKER ============================================================================
+    $scope.addMarker = function() {
+        $scope.newMarker = {
+            title: title.value,
+            address: address.value,
+            category: category.value,
+            description: description.value,
+            url: url.value,
+            latitude: latitude.value,
+            longitude: longitude.value
+        }
+        markersFactory.addMarker($scope.newMarker, function(returnDataFromFactory){
+            if(returnDataFromFactory.hasOwnProperty('errors')){
+                $scope.newMarkerErrors = returnDataFromFactory.errors.general;
+            } else {
+                showAllMarkers();
+                $scope.newMarker = {};
+            }
         })
     };
-    getSessionUser();
-
-// LOG OUT A USER ===============================================================================
-    $scope.logout = function() {
-        usersFactory.logout(function(){
-            $location.url('/login')
-        });
-    };
 
 
-}]);
+
+
+// // When browser doesn't support Geolocation
+// } else {
+//     var pos = {
+//             lat: 30.180213,
+//             lng: 7.253032
+//     };
+//
+//     var map = new google.maps.Map(document.getElementById('map'), {
+//         center: start,
+//         zoom: 3,
+//         });
+//
+//     var infoWindow = new google.maps.InfoWindow({map: map});
+//     var pos = {
+//             lat: 41.850,
+//             lng: -87.650
+//         };
+//     var marker = new google.maps.Marker({
+//             map: map,
+//             draggable: true,
+//             animation: google.maps.Animation.DROP,
+//             position: pos
+//         });
+//     marker.addListener('click', toggleBounce);
+//     marker.setPosition(pos);
+//     map.setCenter(pos);
+//
+//     // Get the HTML input element for search for the autocomplete search box
+//     var input = document.getElementById('pac-input');
+//     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+//     // Create the autocomplete object.
+//
+//     var autocomplete = new google.maps.places.Autocomplete(input);
+//
+//
+//     handleLocationError(false, infoWindow, map.getCenter());
+// }
+//
+//

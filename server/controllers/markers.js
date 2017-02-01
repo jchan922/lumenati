@@ -33,7 +33,6 @@ module.exports = {
                 }
             }
             res.json(errors);
-            console.log("********************* Validation errors".red);
         } else {
             User.findOne({_id:req.session.user._id}).exec(function(err, user){
                 addMarker._creator = user._id;
@@ -51,42 +50,20 @@ module.exports = {
                         })
                     }
                 })
-                console.log("***************** Marker created and added to User".green);
-                console.log("Data created:".green, addMarker);
-                // console.log("Current user:".green, user);
-                console.log("Going back to the front-end. *****************".green);
             })
         }
     },
 
-
 // SHOW ALL MARKERS TO CURRENT USER ===========================================================================
     show_all: function(req,res){
-        console.log("***************** Got to SERVER markers.js SHOW ALL USER MARKERS ".yellow);
-        // console.log("***************** DATA TO CREATE".yellow, req.body);
         User.findOne({_id:req.session.user._id}).populate('markers').exec(function(err, markers){
             if(err){
                 res.json(err);
             } else {
-                console.log(markers);
                 res.json(markers);
             }
         });
     },
-
-// FILTER FOOD MARKERS OF CURRENT USER ===========================================================================
-    filter_food: function(req,res){
-        console.log("***************** Got to SERVER markers.js ADD ".yellow);
-        Marker.find({$and: [{category:"Food"}, {_creator:req.session.user._id}]}).exec(function(err, food_markers){
-            if(err){
-                res.json(err);
-            } else {
-                res.json(food_markers);
-            }
-        });
-    },
-
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GROUP METHODS
@@ -113,7 +90,6 @@ module.exports = {
                 }
             }
             res.json(errors);
-            console.log("********************* Validation errors".red);
         } else {
             User.findOne({_id:req.session.user._id}).exec(function(err, user){
                 addGroupMarker._creator = user._id;
@@ -128,7 +104,6 @@ module.exports = {
                             } else {
                                 Group.findOne({_id:req.params._id}).exec(function(err,group){
                                     if(err){
-                                        console.log("Something went wrong in Group");
                                         res.json(err);
                                     } else {
                                         group.markers.push(addGroupMarker)

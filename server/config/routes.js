@@ -20,7 +20,6 @@ module.exports = function(app) {
     app.get('/user', users.sessionUser);
     app.post('/marker/new', markers.add);
     app.get('/marker/show/all', markers.show_all);
-    app.get('/marker/show/filter/food', markers.filter_food);
 
     // Groups
     app.post('/group/new', groups.create);
@@ -36,7 +35,6 @@ module.exports = function(app) {
 // ESTABLISHING MIDDLEWARE FUNCTION
 function userAuth(req,res,next){
     if(req.session.user){
-        // console.log(req.session.user);
         next();
     } else {
         res.sendStatus(401);

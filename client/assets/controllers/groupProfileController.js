@@ -1,5 +1,9 @@
 app.controller('groupProfileController', ['$scope', '$location', '$routeParams', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, $routeParams, usersFactory, markersFactory, groupsFactory) {
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+// GROUP METHODS
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // GET CURRENT GROUP INFO =====================================================================
     var currentGroupInfo = function() {
         groupsFactory.currentGroupInfo($routeParams._id, function(returnDataFromFactory){
@@ -14,27 +18,6 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
     }
     currentGroupInfo();
 
-// CREATE GROUP MARKER =====================================================================
-    $scope.addGroupMarker = function() {
-        $scope.newGroupMarker = {
-            title: title.value,
-            address: address.value,
-            category: category.value,
-            description: description.value,
-            url: url.value,
-            latitude: latitude.value,
-            longitude: longitude.value
-        }
-        markersFactory.addGroupMarker($routeParams._id, $scope.newGroupMarker, function(returnDataFromFactory){
-            if(returnDataFromFactory.hasOwnProperty('errors')){
-                $scope.showAllMarkersErrors = returnDataFromFactory.errors;
-            } else {
-                showAllGroupMarkers();
-                $scope.newGroupMarker = {};
-            }
-        })
-    }
-
 // GET LAST MARKER CREATED ==========================================================================
     var getLastMarkerCreated = function() {
         groupsFactory.getLastMarkerCreated($routeParams._id, function(returnDataFromFactory){
@@ -46,7 +29,6 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
                     groupInItMap(34.1375902,-118.3551984);
                 } else {
                     $scope.lastMarker = returnDataFromFactory
-                    console.log(returnDataFromFactory);
                     groupInItMap(returnDataFromFactory.latitude,returnDataFromFactory.longitude);
                 }
             }
@@ -63,7 +45,6 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
                 $scope.currentGroup = returnDataFromFactory
                 if(returnDataFromFactory.markers != undefined){
                     $scope.markers_array = returnDataFromFactory.markers;
-                    console.log(returnDataFromFactory.markers);
                     $scope.markers = [];
                         var markers_array = $scope.markers_array;
                         var infoWindow = new google.maps.InfoWindow();
@@ -110,6 +91,27 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
         })
     }
 
+
+// CREATE GROUP MARKER =====================================================================
+    $scope.addGroupMarker = function() {
+        $scope.newGroupMarker = {
+            title: title.value,
+            address: address.value,
+            category: category.value,
+            description: description.value,
+            url: url.value,
+            latitude: latitude.value,
+            longitude: longitude.value
+        }
+        markersFactory.addGroupMarker($routeParams._id, $scope.newGroupMarker, function(returnDataFromFactory){
+            if(returnDataFromFactory.hasOwnProperty('errors')){
+                $scope.showAllMarkersErrors = returnDataFromFactory.errors;
+            } else {
+                showAllGroupMarkers();
+                $scope.newGroupMarker = {};
+            }
+        })
+    }
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -175,9 +177,6 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
         for (key in markerForm) {
             console.log(key, markerForm[key]);
             var element = document.getElementById(key)
-            // element.value = '';
-            // console.log("Initial key value", element.value);
-            //
             if(key == 'latitude' || key == 'longitude'){
                 console.log("true");
                 document.getElementById(key).disabled = true;
@@ -187,10 +186,8 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
                 }
             var val = markerForm[key];
             var elementAttr = element.getAttribute("value");
-            // console.log("Get value attribute", elementAttr);
             element.value = val;
             elementAttr = val;
-            // console.log("Value changed to: ", elementAttr);
             element.setAttribute("value", val)
         }
         $scope.markerForm = markerForm;
@@ -229,8 +226,6 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
         usersFactory.getSessionUser(function(user){
             $scope.session_user = user;
             $scope.userGroups = user.groups
-            console.log(user.groups);
-            // console.log("**** Now useable as $scope variable", user);
         })
     };
     getSessionUser();
@@ -240,19 +235,6 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
         usersFactory.logout(function(){
             $location.url('/login')
         });
-    };
-
-
-////////////////////////////////////////////
-// MISC. FUNCTIONS
-///////////////////////////////////////////
-
-    $scope.cancel = function (group_id) {
-        var reg = document.getElementsByClassName("modal-backdrop fade in");
-        reg[0].parentNode.removeChild(reg[0]);
-        $location.url('/profile/group/'+group_id)
-        $scope.regGroup = {}
-        $scope.join = {}
     };
 
 
