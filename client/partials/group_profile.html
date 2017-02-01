@@ -7,8 +7,14 @@
                 <li><a id="lumenati-logo" href="#/dashboard/{{session_user.username}}">lumenati</a></li>
             </ul>
             <ul class="lumenati-nav-ul">
-                <li><a href="#/dashboard/{{session_user.username}}">Groups</a></li>
-                <li><a href="#/profile/{{session_user.username}}" ng-click="">Profile</a></li>
+                <div id="groups-dropdown" class="dropdown">
+                    <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Groups<span class="caret"></span>
+                    </button>
+                    <ul id="groups-dropdown-list" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li ng-repeat="group in userGroups"><a href="#/profile/group/{{group._id}}">{{group.name}}</a></li>
+                    </ul>
+                </div>
                 <li><a href="#" ng-click="logout()">Logout</a></li>
             </ul>
         </div>

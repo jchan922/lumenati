@@ -99,7 +99,6 @@ body {
             color: white;
         }
 
-
 /* APPLICATION NAV BAR*/
 #lumenati-navbar-container{
     width: 100%;
@@ -152,7 +151,58 @@ body {
             color: white;
         }
 
+        #groups-dropdown {
+            display: inline;
+            background-color: #00838F;
+        }
+
+        #groups-dropdown-list {
+            top: 135%;
+            left: -38%;
+            min-width: 10rem;
+        }
+
+        #groups-dropdown #dropdownMenu1 {
+            padding: 0;
+            margin: 0;
+            border: none;
+            background-color: #00838F;
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            font-size: .95em;
+            text-align: center;
+            color: white;
+        }
+
+        #groups-dropdown #groups-dropdown-list li {
+            display: block;
+            text-align: left;
+        }
+
+        #groups-dropdown #groups-dropdown-list a {
+            color: black;
+        }
+
+
+        #groups-dropdown #groups-dropdown-list a:hover {
+            color: #4DB6AC;
+        }
+
+
+
 @media screen and (min-width:768px) {
+    #groups-dropdown #dropdownMenu1 {
+        padding: 0;
+        margin: 0;
+        border: none;
+        background-color: #00838F;
+        font-family: 'Lato', sans-serif;
+        font-weight: 700;
+        font-size: .75em;
+        text-align: center;
+        color: white;
+    }
+
     #lumenati-navbar-container{
         padding: 0;
     }
@@ -164,4 +214,16 @@ body {
             .lumenati-nav-ul li, .lumenati-nav-ul a {
                 font-size: .85em;
             }
+
+            #groups-dropdown-list {
+                left: -105%;
+                min-width: 15rem;
+            }
+
+            #groups-dropdown #groups-dropdown-list a {
+                color: black;
+                font-size: 1.25em;
+            }
+
+
 }

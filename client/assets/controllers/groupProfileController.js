@@ -35,7 +35,6 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
         })
     }
 
-
 // GET LAST MARKER CREATED ==========================================================================
     var getLastMarkerCreated = function() {
         groupsFactory.getLastMarkerCreated($routeParams._id, function(returnDataFromFactory){
@@ -230,6 +229,7 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
         usersFactory.getSessionUser(function(user){
             $scope.session_user = user;
             $scope.userGroups = user.groups
+            console.log(user.groups);
             // console.log("**** Now useable as $scope variable", user);
         })
     };
