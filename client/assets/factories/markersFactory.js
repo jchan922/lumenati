@@ -9,29 +9,6 @@ app.factory('markersFactory', ['$http', '$routeParams', function($http, $routePa
     var factory = {};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SINGLE USER MARKERS
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// CREATE NEW MARKER METHOD TO SERVER =============================================================
-    factory.addMarker = function(newMarkerObjectFromForm, callback){
-        $http.post('/marker/new', newMarkerObjectFromForm).then(function(returnedDataFromServer){
-            if(typeof(callback) == 'function'){
-                callback(returnedDataFromServer.data);
-            }
-        });
-    };
-
-
-// SHOW ALL USER MARKERS METHOD TO SERVER =============================================================
-    factory.showAllMarkers = function(callback){
-        $http.get('/marker/show/all').then(function(returnedDataFromServer){
-            if(typeof(callback) == 'function'){
-                callback(returnedDataFromServer.data);
-            }
-        });
-    };
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GROUP MARKERS
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -53,8 +30,6 @@ app.factory('markersFactory', ['$http', '$routeParams', function($http, $routePa
         });
 
     };
-
-
 
     return factory;
 

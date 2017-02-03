@@ -18,8 +18,6 @@ module.exports = function(app) {
     // Single User
     app.post('/logout', users.logout);
     app.get('/user', users.sessionUser);
-    app.post('/marker/new', markers.add);
-    app.get('/marker/show/all', markers.show_all);
 
     // Groups
     app.post('/group/new', groups.create);

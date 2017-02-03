@@ -10,10 +10,7 @@ app.factory('usersFactory', ['$http', '$routeParams', function($http, $routePara
 
 // REGISTER METHOD TO SERVER ====================================================================
     factory.register = function(userRegistrationObjectFromForm, callback){
-        // console.log("***************** Got to CLIENT usersFactory.js FACTORY.REGISTER");
-        // console.log(userRegistrationObjectFromForm);
         $http.post('/register', userRegistrationObjectFromForm).then(function(returnedDataFromServer){
-            // console.log("Response from server is: ", returnedDataFromServer.data);
             if(typeof(callback) == 'function'){
                 callback(returnedDataFromServer.data);
             }
@@ -23,9 +20,7 @@ app.factory('usersFactory', ['$http', '$routeParams', function($http, $routePara
 // LOG IN METHOD TO SERVER =======================================================================
 
     factory.login = function(userLoginObjectFromForm, callback){
-        // console.log("***************** Got to CLIENT usersFactory.js FACTORY.LOGIN");
         $http.post('/login', userLoginObjectFromForm).then(function(returnedDataFromServer){
-            // console.log("Response from server is: ", returnedDataFromServer.data);
             if(typeof(callback) == 'function'){
                 callback(returnedDataFromServer.data);
             }
@@ -34,9 +29,7 @@ app.factory('usersFactory', ['$http', '$routeParams', function($http, $routePara
 
 // LOG OUT CURRENT USER METHOD TO SERVER =============================================================
     factory.logout = function(callback){
-        // console.log("***************** Got to CLIENT usersFactory.js FACTORY.LOUGOUT");
         $http.post('/logout').then(function(returnedDataFromServer){
-            // console.log("USER IS LOGGED OUT");
             if(typeof(callback) == 'function'){
                 callback();
             }
@@ -45,9 +38,7 @@ app.factory('usersFactory', ['$http', '$routeParams', function($http, $routePara
 
 // GET SESSION USER METHOD TO SERVER =============================================================
     factory.getSessionUser = function(callback){
-        // console.log("**** Got to CLIENT usersFactory.js FACTORY.GET CURRENT USER");
         $http.get('/user').then(function(returnedDataFromServer){
-            // console.log("**** Response from server is: ", returnedDataFromServer.data);
             if(typeof(callback) == 'function'){
                 callback(returnedDataFromServer.data );
             }

@@ -1,4 +1,4 @@
-app.controller('groupProfileController', ['$scope', '$location', '$routeParams', '$timeout', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, $routeParams, $timeout, usersFactory, markersFactory, groupsFactory) {
+app.controller('groupProfileController', ['$scope', '$location', '$routeParams', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, $routeParams, usersFactory, markersFactory, groupsFactory) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GROUP METHODS
@@ -59,7 +59,6 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
                             url: info.url,
                             category: info.category,
                             list: info.list,
-                            createdAt: info.createdAt
                         });
                             google.maps.event.addListener(marker, 'click', function(){
                                 if (marker.url){
@@ -101,7 +100,8 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
             description: description.value,
             url: url.value,
             latitude: latitude.value,
-            longitude: longitude.value
+            longitude: longitude.value,
+            _creator: $scope.session_user
         }
         markersFactory.addGroupMarker($routeParams._id, $scope.newGroupMarker, function(returnDataFromFactory){
             if(returnDataFromFactory.hasOwnProperty('errors')){
@@ -176,13 +176,10 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
             longitude: lng
         };
         for (key in markerForm) {
-            console.log(key, markerForm[key]);
             var element = document.getElementById(key)
             if(key == 'latitude' || key == 'longitude'){
-                console.log("true");
                 document.getElementById(key).disabled = true;
             } else {
-                console.log("false");
                 document.getElementById(key).disabled = false;
                 }
             var val = markerForm[key];
