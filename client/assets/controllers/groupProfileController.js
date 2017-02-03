@@ -1,4 +1,4 @@
-app.controller('groupProfileController', ['$scope', '$location', '$routeParams', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, $routeParams, usersFactory, markersFactory, groupsFactory) {
+app.controller('groupProfileController', ['$scope', '$location', '$routeParams', '$timeout', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, $routeParams, $timeout, usersFactory, markersFactory, groupsFactory) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GROUP METHODS
@@ -109,6 +109,7 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
             } else {
                 showAllGroupMarkers();
                 $scope.newGroupMarker = {};
+                removeGroupModal();
             }
         })
     }
@@ -212,8 +213,10 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
 
 // PROGRAMATICALLY REMOVE MODAL ==========================================================================
     var removeGroupModal = function() {
-        var modal = angular.element(document.querySelector('.modal-backdrop fade show'));
-        modal.remove();
+        var showModal = angular.element(document.querySelector('.show'));
+        var modalBackdrop = angular.element(document.querySelector('.modal-backdrop'));
+        showModal.remove();
+        modalBackdrop.remove();
     }
 
 

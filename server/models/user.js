@@ -4,7 +4,6 @@
 //  *                               *   //
 //  *********************************   //
 
-console.log('Server>Models>user.js is running!!'.blue);
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;

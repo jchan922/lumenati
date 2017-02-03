@@ -5,7 +5,6 @@
 //  *                                   *   //
 //  *************************************   //
 
-console.log('Server>Models>bookmark.js is running!!'.blue);
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 

@@ -16,7 +16,7 @@ var mongoose      = require('mongoose'),
 //  Regular expression that checks for .js extension
     reg           = new RegExp( ".js$", "i" ),
 // database information
-    dbURI         = 'mongodb://localhost/mean_project';
+    dbURI         = 'mongodb://localhost/lumenati';
 // Connect to the database
 mongoose.connect( dbURI );
 
@@ -25,7 +25,7 @@ mongoose.connect( dbURI );
 *  When successfully connected
 */
 mongoose.connection.on( 'connected', function () {
-    console.log( `Mongoose default connection open to ${ dbURI }`.blue );
+    console.log( `Mongoose default connection open to ${ dbURI }`.green );
 });
 
 mongoose.connection.on( 'error', function ( err ) {

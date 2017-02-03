@@ -21,48 +21,20 @@
     </nav>
 
 
-<div id="group-profile-top-container">
-    <div id="group-profile-sidebar">
-        <div id="map-group-header">
-            <h1>{{currentGroup.name}}</h1>
-            <p>Group created: {{currentGroup.createdAt | date:"MMMM dd, yyyy"}}</p>
+    <div id="group-profile-top-container">
+        <div id="group-profile-sidebar">
+            <div id="map-group-header">
+                <h1>{{currentGroup.name}}</h1>
+                <p>Group created: {{currentGroup.createdAt | date:"MMMM dd, yyyy"}}</p>
+            </div>
+            <div id="map-group-search">
+                <input id="group-profile-pac-input" class="controls" type="text" placeholder="Search For A Place">
+                <button id="group-add-modalopen" class="btn" type="button" data-toggle="modal" data-target="#addBookmark">Bookmark It</button>
+            </div>
         </div>
-        <div id="map-group-search">
-            <input id="group-profile-pac-input" class="controls" type="text" placeholder="Search For A Place">
-            <button id="group-add-modalopen" class="btn" type="button" data-toggle="modal" data-target="#addBookmark">Bookmark It</button>
-        </div>
+
+        <div id="map"></div>
     </div>
-
-    <div id="map"></div>
-</div>
-
-
-<!-- <div id="group-profile-top-container">
-    <h1>{{currentGroup.name}}</h1>
-    <p>Created On: {{currentGroup.createdAt | date:"MMMM dd, yyyy"}}</p>
-    <button type="button" class="btn"><a id="add_button" href="#/dashboard/group/{{currentGroup._id}}">Add New Bookmarks</a></button>
-
-    <h3>GROUP MEMBERS</h3>
-    <ul ng-repeat="member in currentGroup.members">
-        <li>{{member.first_name}} {{member.last_name}}</li>
-    </ul>
-</div>
-
-
-<h3>LATEST MARKERS</h3>
-<p>{{noMarkers}}</p>
-<ul ng-repeat="marker in currentGroup.markers | orderBy:'-createdAt' | limitTo:5">
-    <li><b>{{marker.title}}</b> - <i>{{marker.category}}</i><br>{{marker.address}}<br></li>
-</ul> -->
-
-
-
-<!-- <h3>GROUP STATUS</h3>
-<h4><b>{{currentStatus}}</b></h4>
-<form ng-submit="changeGroupStatus()">
-    <input type="text" class="form-control noresize" rows="3" id="comment" ng-model="groupStatus.comment" placeholder="Group notes, updates, and other findings..."></input>
-    <button class="btn" type="submit">Update</button>
-</form> -->
 
 
     <!-- Begin Create Group Modal -->

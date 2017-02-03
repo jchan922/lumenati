@@ -35,9 +35,6 @@ app.use(session(sessionConfig));
 
 // USE MIDDLEWARE =========================================================================
 app.use(function(req,res,next){
-    console.log("********************************".green);
-    console.log("SESSION USER: ".green, req.session.user);
-    console.log("********************************".green);
     next();
 })
 
@@ -51,5 +48,5 @@ routes_setter(app);
 
 // SERVER LISTEN ==========================================================================
 var server = app.listen(port, function() {
-    console.log("SERVER.JS is working!!".blue)
+    console.log("SERVER.JS is working!!".green)
 })

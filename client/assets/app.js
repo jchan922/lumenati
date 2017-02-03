@@ -29,7 +29,30 @@ app.config(function ($routeProvider, $httpProvider) {
         .when('/profile/group/:_id',{
             templateUrl: 'partials/group_profile.html'
         })
+        .when('/fb_test',{
+            templateUrl: 'partials/fb_login.html'
+        })
         .otherwise({
             redirectTo: '/home'
         });
 });
+
+// *********************************************
+// FACEBOOK LOGIN
+// *********************************************
+window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '384999515189949',
+    xfbml      : true,
+    version    : 'v2.8'
+  });
+  FB.AppEvents.logPageView();
+};
+
+(function(d, s, id){
+   var js, fjs = d.getElementsByTagName(s)[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement(s); js.id = id;
+   js.src = "//connect.facebook.net/en_US/sdk.js";
+   fjs.parentNode.insertBefore(js, fjs);
+ }(document, 'script', 'facebook-jssdk'));
