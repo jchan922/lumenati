@@ -3,8 +3,7 @@
     <div id="navbar-container">
         <div id="navbar-left">
             <ul class="navbar-list">
-                <li>About</li>
-                <li>Features</li>
+                <li id="about-scroll"><a ng-click="scrollTo('about-container')">About</a></li>
             </ul>
         </div>
         <div id="navbar-center">
@@ -34,28 +33,21 @@
             <h2>Traveling the world can be an amazing, eye-opening experience.</h2>
             <h3>Normally, we create long lists of things we want to see, but we think maps are easier on the eyes. <span class="dosis-800">Lumenati</span> combines the best of both worlds so you can get the most out of your next trip. Whether it's in a group or on your own, we provide you with the tools to ensure that you don't miss a thing.</h3>
         </div>
+        <div id="home-description-container">
+            <div class="home-description-category">
+                <h3>Create A Profile</h3>
+                <p>Because planning can get messy. Keep tabs on all your trips and groups you normally travel with.</p>
+            </div>
+            <div class="home-description-category">
+                <h3>Collaborate Together</h3>
+                <p>Keep everyone updated and in the loop. We provide a central location where everyone in the group can chime in.</p>
+            </div>
+            <div class="home-description-category">
+                <h3>Google Maps Integration</h3>
+                <p>We've implemented the Google Maps and Places API's to track down locations and places accurately for you.</p>
+            </div>
+        </div>
     </div>
-
-
-    <div class="home-description-container">
-
-        <div class="home-description-category">
-            <h3>Create A Profile</h3>
-            <p>Because planning can get messy. Keep tabs on all your trips and groups you normally travel with.</p>
-        </div>
-
-        <div class="home-description-category">
-            <h3>Collaborate Together</h3>
-            <p>Keep everyone updated and in the loop. We provide a central location where everyone in the group can chime in.</p>
-        </div>
-
-        <div class="home-description-category">
-            <h3>Google Maps Integration</h3>
-            <p>We've implemented the Google Maps and Places API's to track down locations and places accurately for you.</p>
-        </div>
-
-    </div>
-
 
 
     <!-- Begin Modal -->
@@ -125,12 +117,9 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
+    <div id="copyright">
+        <p> Copyright &#169;2017. Created by Justin Chan.</p>
+    </div>
 
 
 

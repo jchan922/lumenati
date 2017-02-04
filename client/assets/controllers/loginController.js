@@ -4,7 +4,7 @@
 //  *                                       *  //
 //  *****************************************  //
 
-app.controller('loginController', ['$scope', '$location', 'usersFactory', function($scope, $location, usersFactory) {
+app.controller('loginController', ['$scope', '$location', '$anchorScroll', 'usersFactory', function($scope, $location, $anchorScroll, usersFactory) {
 
 // TEST FOR ANGULAR =======================================================================
     $scope.test = "Angular is Working";
@@ -60,6 +60,13 @@ app.controller('loginController', ['$scope', '$location', 'usersFactory', functi
         var modal = angular.element(document.querySelector('.modal-backdrop'));
         modal.remove();
     }
+
+// SCROLL TO ==========================================================================
+    $scope.scrollTo = function(id) {
+        $location.hash(id);
+        $anchorScroll();
+    }
+
 
 // LOG OUT A USER ==========================================================================
     $scope.logout = function() {

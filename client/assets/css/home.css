@@ -91,7 +91,7 @@
         }
 
 #about-container {
-    padding: 0;
+    padding: 50px 0;
     margin: 0;
     background-color: #006064;
     font-size: 2.5rem;
@@ -99,8 +99,9 @@
 
     #about-textbox {
         width: 80%;
-        padding: 50px 0;
+        padding: 0 0 15px 0;
         margin: 0 10%;
+        border-bottom: 1px solid white;
     }
 
         #about-textbox h2 {
@@ -122,47 +123,60 @@
             color: white;
         }
 
-.home-description-container {
-    background-color: #eaf3f7;
-    width: 100%;
-    padding: 50px 0;
+    #home-description-container {
+        width: 80%;
+        padding: 15px 0 0 0;
+        margin: 0 10%;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .home-description-category {
+            width: 100%;
+            margin: 10px 0;
+            padding: 0;
+            font-size: 2rem;
+        }
+
+        .home-description-category h3 {
+            margin: 0;
+            padding: 0;
+            font-family: 'Dosis', sans-serif;
+            font-weight: 900;
+            font-size: .75em;
+            text-align: left;
+            opacity: .87;
+            color: white;
+        }
+
+        .home-description-category p {
+            margin: 0;
+            padding: 0;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 400;
+            font-size: .5em;
+            text-align: left;
+            color: white;
+            opacity: .87;
+        }
+
+#copyright {
     margin: 0;
-    display: flex;
-    flex-direction: column;
+    padding: 0;
 }
 
-    .home-description-category {
-        width: 90%;
-        margin: 10px 5%;
-        padding: 0;
-        font-size: 2rem;
-    }
-
-    .home-description-category h3 {
+    #copyright p {
         margin: 0;
         padding: 0;
-        font-family: 'Dosis', sans-serif;
-        font-weight: 900;
-        font-size: .75em;
-        text-align: left;
-        opacity: .87;
-        color: #006064;
-    }
-
-    .home-description-category p {
-        margin: 0;
-        padding: 0;
-        font-family: 'Raleway', sans-serif;
-        font-weight: 400;
         font-size: .5em;
-        text-align: left;
-        /*color: #FFC107;*/
-        opacity: .54;
+        text-align: center;
     }
+
+
 
 .modal-content {
     width: 90%;
-    margin: 5%;
+    margin: 0 5%;
 }
 
     .modal-header {

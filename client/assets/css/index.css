@@ -66,6 +66,10 @@ body {
             padding-left: 10px;
         }
 
+        #about-scroll {
+            cursor: pointer;
+        }
+
     #navbar-center {
         padding: 5px 0;
         margin: auto 0;
