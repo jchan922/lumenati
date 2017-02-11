@@ -109,7 +109,9 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
             } else {
                 showAllGroupMarkers();
                 $scope.newGroupMarker = {};
-                removeGroupModal();
+                var searchInput = document.getElementById('group-profile-pac-input');
+                searchInput.value = "";
+
             }
         })
     }
