@@ -4,7 +4,7 @@
 //  *                                   *   //
 //  *************************************   //
 
-var app = angular.module('app', ['ngRoute']);
+var app = angular.module('app', ['ngAnimate', 'ngRoute', 'ui.bootstrap']);
 
 app.factory('loginInterceptor', ['$q','$location',function($q, $location){
     return{
@@ -17,10 +17,10 @@ app.factory('loginInterceptor', ['$q','$location',function($q, $location){
     }
 }]);
 
-app.config(function ($routeProvider, $httpProvider) {
+app.config(function ($routeProvider, $httpProvider, $locationProvider) {
     $httpProvider.interceptors.push('loginInterceptor');
     $routeProvider
-        .when('/home',{
+        .when('/',{
             templateUrl: 'partials/home.html'
         })
         .when('/dashboard/:username',{
@@ -33,8 +33,11 @@ app.config(function ($routeProvider, $httpProvider) {
             templateUrl: 'partials/fb_login.html'
         })
         .otherwise({
-            redirectTo: '/home'
+            redirectTo: '/'
         });
+
+    // use the HTML5 History API
+    $locationProvider.html5Mode(true);
 });
 
 // *********************************************

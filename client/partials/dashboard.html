@@ -3,7 +3,7 @@
     <nav id="lumenati-navbar-container">
         <div id="lumenati-navbar">
             <ul class="lumenati-nav-ul">
-                <li><a id="lumenati-logo" href="#/dashboard/{{session_user.username}}">lumenati</a></li>
+                <li><a id="lumenati-logo" href="/dashboard/{{session_user.username}}">lumenati</a></li>
             </ul>
             <ul class="lumenati-nav-ul">
                 <div id="groups-dropdown" class="dropdown">
@@ -11,14 +11,13 @@
                     Groups<span class="caret"></span>
                     </button>
                     <ul id="groups-dropdown-list" class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li ng-repeat="group in userGroups"><a class="button" href="#/profile/group/{{group._id}}">{{group.name}}</a></li>
+                        <li ng-repeat="group in userGroups"><a class="button" href="/profile/group/{{group._id}}">{{group.name}}</a></li>
                     </ul>
                 </div>
-                <li><a href="#" ng-click="logout()">Logout</a></li>
+                <li><a href="/" ng-click="logout()">Logout</a></li>
             </ul>
         </div>
     </nav>
-
 
     <div id="dashboard-container">
         <div id="dashboard-content-upper">
@@ -26,7 +25,7 @@
             <div id="dashboard-current">
                 <h2>Current Groups</h2>
                 <ul id="current-groups-list">
-                    <li ng-repeat="group in userGroups"><a href="#/profile/group/{{group._id}}" ng-click="cancel(group._id)">{{group.name}}</a></li>
+                    <li ng-repeat="group in userGroups"><a href="/profile/group/{{group._id}}">{{group.name}}</a></li>
                 </ul>
             </div>
         </div>

@@ -4,7 +4,7 @@
 //  *                                       *  //
 //  *****************************************  //
 
-app.controller('loginController', ['$scope', '$location', '$anchorScroll', 'usersFactory', function($scope, $location, $anchorScroll, usersFactory) {
+app.controller('loginController', ['$scope', '$location', '$anchorScroll', '$uibModal', '$log', '$document', 'usersFactory', function($scope, $location, $anchorScroll, $uibModal, $log, $document, usersFactory) {
 
 // TEST FOR ANGULAR =======================================================================
     $scope.test = "Angular is Working";
@@ -25,35 +25,25 @@ app.controller('loginController', ['$scope', '$location', '$anchorScroll', 'user
         FB.logout(function(response) {
             console.log('User logged out.');
         });
-    }
-
-// REGISTER A USER ========================================================================
-    $scope.registerUser = function() {
-        usersFactory.register($scope.regUser, function(returnDataFromFactory){
-            if(returnDataFromFactory.hasOwnProperty('errors')){
-                $scope.regErrors = returnDataFromFactory.errors;
-                $scope.regUser = {};
-            } else {
-                var username = $scope.regUser.username;
-                removeModal();
-                $location.url('/dashboard/'+username);
-            }
-        });
     };
 
-// LOG IN A USER ==========================================================================
-    $scope.loginUser = function() {
-        usersFactory.login($scope.loginUserAttempt, function(returnDataFromFactory){
-            if(returnDataFromFactory.hasOwnProperty('errors')){
-                $scope.loginErrors = returnDataFromFactory.errors;
-                $scope.loginUserAttempt = {};
-            } else {
-                var username = $scope.loginUserAttempt.username;
-                removeModal();
-                $location.url('/dashboard/'+username);
-            }
-        });
-    };
+
+    $scope.open = function (size) {
+       var modalInstance = $uibModal.open({
+         animation: this.animationsEnabled,
+         templateUrl: 'myModalContent.html',
+         controller: 'modalInstanceController',
+         size: size,
+       });
+
+       modalInstance.result.then(function (selectedItem) {
+         $scope.selected = selectedItem;
+       }, function () {
+         $log.info('Modal dismissed at: ' + new Date());
+       });
+     };
+
+
 
 // PROGRAMATICALLY REMOVE MODAL ==========================================================================
     var removeModal = function() {
