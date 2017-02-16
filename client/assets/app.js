@@ -6,7 +6,7 @@
 
 var app = angular.module('app', ['ngAnimate', 'ngRoute', 'ui.bootstrap']);
 
-app.factory('loginInterceptor', ['$q','$location',function($q, $location){
+app.factory('loginInterceptor', ['$q','$location', function($q, $location){
     return{
         'responseError': function(rejection){
             if (rejection.status == 401){
@@ -16,6 +16,7 @@ app.factory('loginInterceptor', ['$q','$location',function($q, $location){
         }
     }
 }]);
+
 
 app.config(function ($routeProvider, $httpProvider, $locationProvider) {
     $httpProvider.interceptors.push('loginInterceptor');
@@ -37,7 +38,8 @@ app.config(function ($routeProvider, $httpProvider, $locationProvider) {
         });
 
     // use the HTML5 History API
-    $locationProvider.html5Mode(true);
+    // $locationProvider.html5Mode(true).hashPrefix('!');
+
 });
 
 // *********************************************

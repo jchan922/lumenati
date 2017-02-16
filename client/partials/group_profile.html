@@ -4,22 +4,22 @@
     <nav id="lumenati-navbar-container">
         <div id="lumenati-navbar">
             <ul class="lumenati-nav-ul">
-                <li><a id="lumenati-logo" href="/dashboard/{{session_user.username}}">lumenati</a></li>
+                <li><a id="lumenati-logo" href="#!/dashboard/{{session_user.username}}">lumenati</a></li>
             </ul>
             <ul class="lumenati-nav-ul">
-                <div id="groups-dropdown" class="dropdown">
-                    <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <!-- Simple dropdown -->
+                <div id="groups-dropdown" uib-dropdown on-toggle="toggled(open)">
+                  <a href id="simple-dropdown" uib-dropdown-toggle>
                     Groups<span class="caret"></span>
-                    </button>
-                    <ul id="groups-dropdown-list" class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li ng-repeat="group in userGroups"><a href="/profile/group/{{group._id}}">{{group.name}}</a></li>
-                    </ul>
+                  </a>
+                  <ul id="groups-dropdown-list" class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+                      <li ng-repeat="group in userGroups"><a class="button" href="#!/profile/group/{{group._id}}">{{group.name}}</a></li>
+                  </ul>
                 </div>
                 <li><a href="/" ng-click="logout()">Logout</a></li>
             </ul>
         </div>
     </nav>
-
 
     <div id="group-profile-top-container">
         <div id="group-profile-sidebar">
@@ -29,13 +29,12 @@
             </div>
             <div id="map-group-search">
                 <input id="group-profile-pac-input" class="controls" type="text" placeholder="Where To?">
-                <button id="group-add-modalopen" class="btn" type="button" data-toggle="modal" data-target="#addBookmark">Bookmark It</button>
+                <button id="group-add-modalopen" class="btn" type="button" data-toggle="modal" data-target="#addBookmark" ng-click="open('md')">Bookmark It</button>
             </div>
         </div>
 
         <div id="map"></div>
     </div>
-
 
     <!-- Begin Create Group Modal -->
     <div class="modal fade" id="addBookmark" tabindex="-1" role="dialog">
@@ -74,5 +73,57 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Add Bookmark Modal -->
+    <!-- <script type="text/ng-template" id="bookmarkModal.html">
+         <div class="modal-header" >
+            <h2 class="modal-title">Add Bookmark</h2>
+            <button type="button" class="close" id="close-button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+            <div id="group-modal-body" class="modal-body">
+                <p class="redText">{{newMarkerErrors.emptyForm}}</p>
+                <p class="redText">{{newMarkerErrors.title}}</p>
+                <p class="redText">{{newMarkerErrors.address}}</p>
+                <p class="redText">{{newMarkerErrors.coordinates}}</p>
+                <form id="group-modal-form" ng-submit="addGroupMarker()">
+                    <input type="text" class="form-control" id="title" placeholder="Title" ng-model="newGroupMarker.title" value="">
+                    <input type="text" class="form-control" id="address" placeholder="Address" ng-model="newGroupMarker.address" value="">
+                    <select class="form-control" id="category" placeholder="Category" ng-model="newGroupMarker.category" value="">
+                        <option value="" disabled selected>Select A Category...(optional)</option>
+                        <option value="Food">Food</option>
+                        <option value="Coffee">Coffee</option>
+                        <option value="Bar/Nightlife">Bar/Nightlife</option>
+                        <option value="Point of Interest">Point of Interest</option>
+                        <option value="Venue">Venue</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Airport">Airport</option>
+                        <option value="Hotel">Hotel</option>
+                    </select>
+                    <textarea type="textarea" class="form-control noresize" id="description" placeholder="Description" ng-model="newGroupMarker.description" value=""></textarea>
+                    <input type="text" class="form-control" id="url" placeholder="URL (optional)" ng-model="newGroupMarker.url" value="">
+                    <input type="text" class="form-control" id="latitude" placeholder="Latitude" disabled="true" ng-model="newGroupMarker.latitude" value="">
+                    <input type="text" class="form-control" id="longitude" placeholder="Longitude" disabled="true" ng-model="newGroupMarker.longitude" value="">
+                    <input type="submit" class="btn btn-default" value="Add Marker">
+                </form>
+            </div>
+        </div>
+    </script> -->
+
 
 </div>

@@ -27,20 +27,22 @@ app.controller('loginController', ['$scope', '$location', '$anchorScroll', '$uib
         });
     };
 
+    $scope.animationsEnabled = true;
 
     $scope.open = function (size) {
-       var modalInstance = $uibModal.open({
-         animation: this.animationsEnabled,
-         templateUrl: 'myModalContent.html',
-         controller: 'modalInstanceController',
-         size: size,
-       });
+        console.log("TEST");
+        var modalInstance = $uibModal.open({
+            animation: this.animationsEnabled,
+            templateUrl: 'loginModal.html',
+            controller: 'modalInstanceController',
+            size: size,
+        });
 
-       modalInstance.result.then(function (selectedItem) {
-         $scope.selected = selectedItem;
-       }, function () {
-         $log.info('Modal dismissed at: ' + new Date());
-       });
+        modalInstance.result.then(function (selectedItem) {
+           $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
      };
 
 

@@ -9,6 +9,8 @@ var mongoose = require( "mongoose" ),
     port     = process.env.PORT || 8000,
     app      = express();
 
+
+
 // LOCATE CLIENT AND BOWER ================================================================
 app.use(express.static(path.join( root, 'client' )));
 app.use(express.static(path.join( root, 'bower_components' )));

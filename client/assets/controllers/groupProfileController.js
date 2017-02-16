@@ -1,4 +1,4 @@
-app.controller('groupProfileController', ['$scope', '$location', '$routeParams', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, $routeParams, usersFactory, markersFactory, groupsFactory) {
+app.controller('groupProfileController', ['$scope', '$location', '$routeParams', '$uibModal', '$log', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, $routeParams, $uibModal, $log, usersFactory, markersFactory, groupsFactory){
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GROUP METHODS
@@ -111,7 +111,6 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
                 $scope.newGroupMarker = {};
                 var searchInput = document.getElementById('group-profile-pac-input');
                 searchInput.value = "";
-
             }
         })
     }
@@ -152,6 +151,7 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
             google.maps.event.addListener(autocomplete, 'place_changed', function(){
                 var infoWindow = new google.maps.InfoWindow({map: map});
                 var place = autocomplete.getPlace();
+
                 var contentString = '<p><b>'+place.name+'</b></p>'+
                                     '<p>'+place.formatted_address+'</p>';
                 var pos = {
@@ -183,7 +183,7 @@ app.controller('groupProfileController', ['$scope', '$location', '$routeParams',
                 document.getElementById(key).disabled = true;
             } else {
                 document.getElementById(key).disabled = false;
-                }
+            }
             var val = markerForm[key];
             var elementAttr = element.getAttribute("value");
             element.value = val;

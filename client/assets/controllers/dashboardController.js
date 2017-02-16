@@ -6,6 +6,19 @@
 
 app.controller('dashboardController', ['$scope', '$location', '$routeParams', 'usersFactory', 'markersFactory', 'groupsFactory', function($scope, $location, routeParams, usersFactory, markersFactory, groupsFactory) {
 
+    $scope.status = {
+      isopen: false
+    };
+
+    $scope.toggleDropdown = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $scope.status.isopen = !$scope.status.isopen;
+    };
+
+    $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GROUP METHODS
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
